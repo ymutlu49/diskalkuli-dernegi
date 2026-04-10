@@ -1535,25 +1535,50 @@
         <div id="activity-list-admin"></div>
       </div>
     </div>
-    <!-- ÜYELER -->
+    <!-- ÜYELER — dynamic list rendered by YonetimScreen._renderUsers() -->
     <div class="ap-panel" id="ap-uyeler">
-      <div style="padding:0 16px;display:flex;flex-direction:column;gap:0;padding-top:14px">
-        <div class="uye-card"><div class="uye-av" style="background:var(--green-dark)">YM</div><div class="uye-info"><div class="uye-name">Prof. Dr. Yılmaz Mutlu</div><div class="uye-role">YK Başkanı · Muş</div></div><span class="uye-badge" style="background:var(--green-light);color:var(--green-dark)">Başkan</span></div>
-        <div class="uye-card"><div class="uye-av" style="background:var(--brown)">SO</div><div class="uye-info"><div class="uye-name">Prof. Dr. Sinan Olkun</div><div class="uye-role">Onursal Başkan</div></div><span class="uye-badge" style="background:var(--brown-light);color:var(--brown-dark)">Onursal</span></div>
-        <div class="uye-card"><div class="uye-av" style="background:var(--green-mid)">ZÇ</div><div class="uye-info"><div class="uye-name">Doç. Dr. Zekeriya Çam</div><div class="uye-role">YK Başkan Yardımcısı</div></div></div>
-        <div class="uye-card"><div class="uye-av" style="background:var(--green)">ÇD</div><div class="uye-info"><div class="uye-name">Çiğdem Demirtaş</div><div class="uye-role">Genel Sekreter</div></div></div>
-        <div class="uye-card"><div class="uye-av" style="background:var(--green-dark)">EG</div><div class="uye-info"><div class="uye-name">Edanur Güven</div><div class="uye-role">Eğitim Koordinatörü · YK Üyesi</div></div></div>
-        <div class="uye-card"><div class="uye-av" style="background:var(--brown-mid)">YE</div><div class="uye-info"><div class="uye-name">Dr. Yavuz Erdem</div><div class="uye-role">Mali İşler Yönetimi</div></div></div>
-        <div style="height:24px"></div>
+      <div class="usr-toolbar" style="padding:14px 16px 8px;display:flex;flex-direction:column;gap:10px">
+        <button type="button" class="usr-add-btn" onclick="openAddUser()" aria-label="Yeni üye ekle">
+          <span style="font-size:16px;margin-right:6px">➕</span>
+          <span data-i18n="admin.member.add">Yeni Üye Ekle</span>
+        </button>
+        <div class="usr-search-wrap">
+          <input type="search" id="usr-search" class="usr-search-input"
+                 placeholder="🔍 Üye ara..." aria-label="Üye ara">
+        </div>
+        <div class="usr-filter-row" role="tablist" aria-label="Üye filtresi">
+          <div class="usr-filter on" data-cat="tumu"     role="tab" tabindex="0" aria-selected="true">Tümü</div>
+          <div class="usr-filter"    data-cat="yonetim"  role="tab" tabindex="0" aria-selected="false">Yönetim</div>
+          <div class="usr-filter"    data-cat="temsilci" role="tab" tabindex="0" aria-selected="false">Temsilci</div>
+          <div class="usr-filter"    data-cat="uye"      role="tab" tabindex="0" aria-selected="false">Üye</div>
+          <div class="usr-filter"    data-cat="genel"    role="tab" tabindex="0" aria-selected="false">Ziyaretçi</div>
+        </div>
       </div>
+      <div id="usr-list" role="list" aria-label="Üye listesi"></div>
+      <div style="height:24px"></div>
     </div>
-    <!-- BAŞVURULAR -->
+    <!-- BAŞVURULAR — dynamic list rendered by YonetimScreen._renderApps() -->
     <div class="ap-panel" id="ap-basvurular">
-      <div style="padding:14px 16px">
-        <div class="basvuru-item"><div class="basvuru-status status-bekliyor"></div><div style="flex:1"><div class="basvuru-name">Ahmet Kaya</div><div class="basvuru-meta">Üyelik · Matematik Öğretmeni · Ankara · 3 gün önce</div><div class="basvuru-actions"><button class="btn-kucuk btn-kabul" onclick="kararVer(this,'kabul')">✓ Kabul</button><button class="btn-kucuk btn-red" onclick="kararVer(this,'red')">✗ Reddet</button></div></div><span class="basvuru-badge" style="background:#FEF3C7;color:#92400E">Bekliyor</span></div>
-        <div class="basvuru-item"><div class="basvuru-status status-bekliyor"></div><div style="flex:1"><div class="basvuru-name">Fatma Şahin</div><div class="basvuru-meta">İl Temsilciliği · PDR · İzmir · 5 gün önce</div><div class="basvuru-actions"><button class="btn-kucuk btn-kabul" onclick="kararVer(this,'kabul')">✓ Kabul</button><button class="btn-kucuk btn-red" onclick="kararVer(this,'red')">✗ Reddet</button></div></div><span class="basvuru-badge" style="background:#FEF3C7;color:#92400E">Bekliyor</span></div>
-        <div class="basvuru-item"><div class="basvuru-status status-kabul"></div><div style="flex:1"><div class="basvuru-name">Mehmet Demir</div><div class="basvuru-meta">Üyelik · Özel Eğitim Uzmanı · Bursa · 1 hafta önce</div></div><span class="basvuru-badge" style="background:var(--green-light);color:var(--green-dark)">Kabul</span></div>
+      <div class="bsv-toolbar" style="padding:14px 16px 8px;display:flex;flex-direction:column;gap:10px">
+        <div class="bsv-summary" style="display:flex;align-items:center;justify-content:space-between">
+          <div style="font-family:var(--font-d);font-size:13px;font-weight:800;color:var(--green-dark)">
+            Başvurular
+          </div>
+          <div style="display:flex;align-items:center;gap:6px">
+            <span style="font-size:11px;color:var(--gray-400)">Bekleyen:</span>
+            <span id="bsv-bekleyen-count"
+                  style="font-family:var(--font-d);font-size:14px;font-weight:900;color:#92400E;background:#FEF3C7;padding:2px 10px;border-radius:999px">0</span>
+          </div>
+        </div>
+        <div class="bsv-filter-row" role="tablist" aria-label="Başvuru filtresi">
+          <div class="bsv-filter on" data-bcat="tumu"     role="tab" tabindex="0" aria-selected="true">Tümü</div>
+          <div class="bsv-filter"    data-bcat="bekliyor" role="tab" tabindex="0" aria-selected="false">Bekleyen</div>
+          <div class="bsv-filter"    data-bcat="kabul"    role="tab" tabindex="0" aria-selected="false">Kabul</div>
+          <div class="bsv-filter"    data-bcat="red"      role="tab" tabindex="0" aria-selected="false">Reddedilen</div>
+        </div>
       </div>
+      <div id="bsv-list" role="list" aria-label="Başvuru listesi" style="padding:0 16px"></div>
+      <div style="height:24px"></div>
     </div>
     <!-- FİNANS -->
     <div class="ap-panel" id="ap-finans">
