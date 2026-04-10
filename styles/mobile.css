@@ -117,13 +117,16 @@ select {
     border-left:  1px solid var(--gray-200);
     border-right: 1px solid var(--gray-200);
   }
-  /* The bottom nav also needs to constrain to the shell width. */
+  /* The bottom nav also needs to constrain to the shell width.
+     app.css sets `left:50% + transform:translateX(-50%)` for the
+     phone-first layout; we must clear the transform here otherwise
+     the nav slides 215px (half of 430) to the left. */
   #global-nav,
   .bottom-nav {
     max-width: 430px;
-    margin: 0 auto;
-    left: 0;
-    right: 0;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
   }
 }
 

@@ -107,16 +107,18 @@ class I18n {
   }
 
   _readLocale() {
+    // Explicit user preference in localStorage wins.
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored && SUPPORTED_LOCALES.includes(stored)) return stored;
     } catch { /* ignore */ }
 
-    // Auto-detect from the browser
-    if (typeof navigator !== 'undefined' && navigator.language) {
-      const code = navigator.language.slice(0, 2).toLowerCase();
-      if (SUPPORTED_LOCALES.includes(code)) return code;
-    }
+    // This is a Turkish association's app. Default to Turkish
+    // unless the user explicitly picks another locale from the
+    // profile screen. Auto-detection from navigator.language is
+    // intentionally avoided — a German user traveling through an
+    // English-locale browser still gets the primary (Turkish)
+    // experience, which is what the stakeholders expect.
     return DEFAULT_LOCALE;
   }
 
