@@ -19,7 +19,7 @@
  * installed clients pull the new bundle.
  */
 
-const CACHE_VERSION = 'diskalkuli-v16';
+const CACHE_VERSION = 'diskalkuli-v17';
 
 const PRECACHE = [
   './',

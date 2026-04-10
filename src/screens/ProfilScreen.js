@@ -10,23 +10,11 @@ import { ORGANIZATION } from '../data/org.js';
 export class ProfilScreen extends BaseScreen {
   init() {
     this.ctx.bus.on('auth:login', () => this._render());
-    this._injectHeroWatermark();
+    // Hero watermark intentionally NOT injected — the profile
+    // card's avatar fills that role already and the watermark
+    // was clashing with it visually.
     this._injectSocialLinks();
     this._injectLanguageSwitcher();
-  }
-
-  _injectHeroWatermark() {
-    if (!this.el) return;
-    const head = this.el.querySelector('.pf-head');
-    if (!head) return;
-    if (head.querySelector('.pf-hero-watermark')) return;
-
-    const img = document.createElement('img');
-    img.className = 'pf-hero-watermark';
-    img.src = './icons/logo-round.png';
-    img.alt = '';
-    img.setAttribute('aria-hidden', 'true');
-    head.insertBefore(img, head.firstChild);
   }
 
   onEnter() {
