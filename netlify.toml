@@ -32,7 +32,11 @@
     Referrer-Policy           = "strict-origin-when-cross-origin"
     Permissions-Policy        = "camera=(), microphone=(), geolocation=(), payment=()"
     Cross-Origin-Opener-Policy = "same-origin"
-    Content-Security-Policy   = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+    # Note: instagram.com + www.instagram.com are allowed in img-src
+    # and frame-src so future post embeds (oEmbed iframes) can render.
+    # All external links (website, Instagram) are opened via target="_blank"
+    # and don't need CSP allowances — they leave the origin entirely.
+    Content-Security-Policy   = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://*.cdninstagram.com https://scontent.cdninstagram.com; connect-src 'self' https://graph.instagram.com; frame-src 'self' https://www.instagram.com; manifest-src 'self'; worker-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
 
 # Don't cache the service worker — it must be revalidated on every
 # visit so new releases reach users quickly.

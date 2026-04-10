@@ -19,7 +19,7 @@
  * installed clients pull the new bundle.
  */
 
-const CACHE_VERSION = 'diskalkuli-v7';
+const CACHE_VERSION = 'diskalkuli-v8';
 
 const PRECACHE = [
   './',
@@ -61,6 +61,7 @@ const PRECACHE = [
   './src/data/mock-dues.js',
   './src/data/modules.js',
   './src/data/notifications.js',
+  './src/data/org.js',
   './src/data/permissions.js',
   './src/data/roles.js',
   './src/data/user-lifecycle.js',

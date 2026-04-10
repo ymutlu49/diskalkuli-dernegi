@@ -1,7 +1,8 @@
 import { BaseScreen } from '../core/BaseScreen.js';
-import { escapeHtml } from '../core/escapeHtml.js';
+import { escapeHtml, escapeUrl } from '../core/escapeHtml.js';
 import { i18n, t } from '../core/i18n.js';
 import { ROLE_LABELS, ROLE_COLORS } from '../data/roles.js';
+import { ORGANIZATION } from '../data/org.js';
 
 /**
  * Profile screen — user info, stats, settings, language switcher, logout.
@@ -9,6 +10,7 @@ import { ROLE_LABELS, ROLE_COLORS } from '../data/roles.js';
 export class ProfilScreen extends BaseScreen {
   init() {
     this.ctx.bus.on('auth:login', () => this._render());
+    this._injectSocialLinks();
     this._injectLanguageSwitcher();
   }
 
@@ -127,5 +129,66 @@ export class ProfilScreen extends BaseScreen {
       btn.style.background  = on ? 'var(--green-light)' : 'var(--surface,#fff)';
       btn.setAttribute('aria-checked', on ? 'true' : 'false');
     });
+  }
+
+  /* ── Social links section ─────────────────────────────── */
+
+  /**
+   * Inject a "Bize ulaşın" (Contact / Follow) section listing the
+   * organization's public presence: website + Instagram. Each entry
+   * opens in a new tab. On mobile, the Instagram entry is picked up
+   * by the installed Instagram app via Android intent / iOS
+   * Universal Links.
+   */
+  _injectSocialLinks() {
+    if (!this.el) return;
+    const body = this.$('.screen-body');
+    if (!body) return;
+
+    const section = document.createElement('div');
+    section.id = 'pf-social';
+    section.className = 'pf-social-section';
+    section.setAttribute('aria-label', 'Dernek bağlantıları');
+
+    const titleTr = 'Bizi Takip Edin';
+    const titleEn = 'Follow Us';
+    const title = i18n.locale === 'en' ? titleEn : titleTr;
+
+    const cards = ORGANIZATION.social.map((s) => {
+      const desc = i18n.locale === 'en'
+        ? (s.descriptionEn || s.description || '')
+        : (s.description || '');
+      return `
+        <a class="pf-social-card"
+           href="${escapeUrl(s.url)}"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="${escapeHtml(s.name)}: ${escapeHtml(s.displayName)}">
+          <span class="pf-social-icon" aria-hidden="true"
+                style="background:${escapeHtml(s.bg)};color:#fff">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+              <path d="${escapeHtml(s.iconPath)}"/>
+            </svg>
+          </span>
+          <span class="pf-social-text">
+            <span class="pf-social-name">${escapeHtml(s.name)}</span>
+            <span class="pf-social-handle">${escapeHtml(s.displayName)}</span>
+            ${desc ? `<span class="pf-social-desc">${escapeHtml(desc)}</span>` : ''}
+          </span>
+          <svg class="pf-social-arrow" aria-hidden="true"
+               viewBox="0 0 24 24" width="18" height="18"
+               fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M7 17L17 7M9 7h8v8"/>
+          </svg>
+        </a>
+      `;
+    }).join('');
+
+    section.innerHTML = `
+      <div class="pf-social-title">🔗 ${escapeHtml(title)}</div>
+      <div class="pf-social-grid">${cards}</div>
+    `;
+
+    body.appendChild(section);
   }
 }
