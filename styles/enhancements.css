@@ -92,6 +92,41 @@
    layout. */
 
 /* ═══════════════════════════════════════════════════════════
+   ADMIN PANEL TAB BAR — 2-row wrap
+   Originally a single row with overflow:auto, which worked but
+   gave no visual hint that 4 tabs (İçerik, Aidat, Denetim, Rapor)
+   lived off-screen to the right. Users never found them. We now
+   wrap to two rows so every tab is visible at once on mobile,
+   with an active-tab underline to anchor the user.
+   ═══════════════════════════════════════════════════════════ */
+#screen-yonetim .admin-panel-tabs {
+  /* Override app.css's overflow-x:auto */
+  overflow-x: visible !important;
+  flex-wrap: wrap !important;
+  justify-content: flex-start;
+  padding: 4px 8px 0;
+  row-gap: 2px;
+}
+#screen-yonetim .ap-tab {
+  flex: 1 0 auto;
+  min-width: 72px;
+  text-align: center;
+  padding: 10px 12px !important;
+  font-size: 11.5px !important;
+  /* Keep the active underline from app.css but tighten spacing */
+  border-bottom-width: 2px;
+}
+/* On very narrow phones, force 2 equal rows of 5 */
+@media (max-width: 420px) {
+  #screen-yonetim .ap-tab {
+    flex: 1 1 calc(20% - 0.1px);
+    min-width: 0;
+    font-size: 11px !important;
+    padding: 9px 6px !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
    ADMIN — USER MANAGEMENT (ap-uyeler)
    ═══════════════════════════════════════════════════════════ */
 .usr-add-btn {
