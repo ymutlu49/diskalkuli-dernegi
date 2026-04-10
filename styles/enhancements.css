@@ -47,23 +47,23 @@
 }
 
 /* ── Login hero ─────────────────────────────────────────────
-   80 → 120. The source asset (logo-small.png) has ~8% of
-   transparent padding baked around the circular artwork,
-   which made the white disc look oversized. We render it as
-   a CSS background-image with background-size:115% so the
-   artwork is visually zoomed in by 15%, cropping the dead
-   padding. Result: logo fills the disc edge-to-edge with
-   no visible white halo. */
+   The source asset (logo-small.png) has ~8% transparent
+   padding baked around the circular artwork. We render it as
+   a background-image, crop the padding with background-size,
+   and anchor it dead-centre so the logo sits perfectly inside
+   a compact white disc. Disc is intentionally sized smaller
+   than v11 so it no longer dominates the hero band. */
 .login-hero-logo {
-  width: 120px !important;
-  height: 120px !important;
+  width: 100px !important;
+  height: 100px !important;
   background-color: rgba(255, 255, 255, 0.95) !important;
   background-image: url('../icons/logo-small.png') !important;
   background-repeat: no-repeat !important;
-  background-position: center center !important;
-  background-size: 115% !important;
+  background-position: 50% 50% !important;
+  background-size: 118% auto !important;
   border-radius: 50% !important;
   padding: 0 !important;
+  margin: 0 auto !important;
   box-shadow:
     0 0 0 2px rgba(255, 255, 255, 0.25),
     0 8px 28px rgba(0, 0, 0, 0.22) !important;
@@ -71,15 +71,16 @@
 
 /* ── Auth header (demo-picker screen) ───────────────────── */
 .auth-header-logo {
-  width: 100px !important;
-  height: 100px !important;
+  width: 86px !important;
+  height: 86px !important;
   background-color: rgba(255, 255, 255, 0.95) !important;
   background-image: url('../icons/logo-small.png') !important;
   background-repeat: no-repeat !important;
-  background-position: center center !important;
-  background-size: 115% !important;
+  background-position: 50% 50% !important;
+  background-size: 118% auto !important;
   border-radius: 50% !important;
   padding: 0 !important;
+  margin: 0 auto !important;
   box-shadow:
     0 0 0 2px rgba(255, 255, 255, 0.25),
     0 6px 24px rgba(0, 0, 0, 0.25) !important;
