@@ -20,11 +20,30 @@ export class HomeScreen extends BaseScreen {
     this.ctx.bus.on('notif:changed', () => {
       this.ctx.services.notifications.renderBadge();
     });
-    // Inject the social/contact footer once; it's static and not
-    // user-specific, so it doesn't need to go through _render().
+    // One-time DOM setup: logo watermark + contact footer.
+    this._injectHeroWatermark();
     this._injectSocialFooter();
     // Re-label on locale change.
     i18n.onChange(() => this._refreshSocialFooterLabels());
+  }
+
+  /**
+   * Drop a large, very transparent copy of the association logo
+   * into the hero card as a watermark. Gives the screen a clear
+   * visual brand anchor without fighting the greeting text.
+   */
+  _injectHeroWatermark() {
+    if (!this.el) return;
+    const hero = this.el.querySelector('.hero');
+    if (!hero) return;
+    if (hero.querySelector('.home-hero-logo-wrap')) return; // once
+
+    const wrap = document.createElement('div');
+    wrap.className = 'home-hero-logo-wrap';
+    wrap.setAttribute('aria-hidden', 'true');
+    wrap.innerHTML = `<img src="./icons/logo-small.png" alt="">`;
+    // Insert as the very first child so it sits behind everything.
+    hero.insertBefore(wrap, hero.firstChild);
   }
 
   onEnter() {

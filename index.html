@@ -72,13 +72,13 @@
 <div class="screen active" id="screen-splash" role="region" aria-label="Karşılama ekranı">
   <div class="splash-top-bar" aria-hidden="true"></div>
   <div class="splash-center">
-    <img class="splash-tree" id="splash-logo"
-         src="./icons/logo.png" alt="Diskalkuli Derneği logosu"
+    <img class="splash-tree splash-logo-full" id="splash-logo"
+         src="./icons/logo-small.png" alt="Diskalkuli Derneği logosu"
          role="button" tabindex="0"
          data-goto="login">
-    <div class="splash-year">2017</div>
-    <h1 class="splash-org">Diskalkuli Derneği</h1>
-    <p class="splash-tagline">Herkes Matematik Öğrenebilir</p>
+    <!-- Tagline kept as a screen-reader aid; the logo text already carries it visually. -->
+    <h1 class="sr-only">Diskalkuli Derneği</h1>
+    <p class="splash-tagline" data-i18n="app.tagline">Herkes Matematik Öğrenebilir</p>
     <div class="splash-progress" role="progressbar" aria-label="Yükleniyor" aria-valuemin="0" aria-valuemax="100"><div class="splash-bar"></div></div>
   </div>
   <div class="splash-footer">
