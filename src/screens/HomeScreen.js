@@ -41,7 +41,7 @@ export class HomeScreen extends BaseScreen {
     const wrap = document.createElement('div');
     wrap.className = 'home-hero-logo-wrap';
     wrap.setAttribute('aria-hidden', 'true');
-    wrap.innerHTML = `<img src="./icons/logo-small.png" alt="">`;
+    wrap.innerHTML = `<img src="./icons/logo-round.png" alt="">`;
     // Insert as the very first child so it sits behind everything.
     hero.insertBefore(wrap, hero.firstChild);
   }

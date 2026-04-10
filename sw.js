@@ -19,7 +19,7 @@
  * installed clients pull the new bundle.
  */
 
-const CACHE_VERSION = 'diskalkuli-v13';
+const CACHE_VERSION = 'diskalkuli-v14';
 
 const PRECACHE = [
   './',
@@ -33,6 +33,7 @@ const PRECACHE = [
 
   './icons/logo.png',
   './icons/logo-small.png',
+  './icons/logo-round.png',
 
   './src/main.js',
   './src/compat.js',

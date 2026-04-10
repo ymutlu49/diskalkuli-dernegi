@@ -47,20 +47,20 @@
 }
 
 /* ── Login hero ─────────────────────────────────────────────
-   The source asset (logo-small.png) has ~8% transparent
-   padding baked around the circular artwork. We render it as
-   a background-image, crop the padding with background-size,
-   and anchor it dead-centre so the logo sits perfectly inside
-   a compact white disc. Disc is intentionally sized smaller
-   than v11 so it no longer dominates the hero band. */
+   Uses logo-round.png — a pre-trimmed square export where
+   the circular artwork fills ~97% of the canvas and the
+   optical centre matches the geometric centre (verified
+   via Pillow: offset dx=+0.5, dy=-1.5 px out of 360).
+   This lets us drop the aggressive background-size hack
+   and rely on a plain 100% fit. */
 .login-hero-logo {
   width: 100px !important;
   height: 100px !important;
   background-color: rgba(255, 255, 255, 0.95) !important;
-  background-image: url('../icons/logo-small.png') !important;
+  background-image: url('../icons/logo-round.png') !important;
   background-repeat: no-repeat !important;
   background-position: 50% 50% !important;
-  background-size: 118% auto !important;
+  background-size: 96% auto !important;
   border-radius: 50% !important;
   padding: 0 !important;
   margin: 0 auto !important;
@@ -74,10 +74,10 @@
   width: 86px !important;
   height: 86px !important;
   background-color: rgba(255, 255, 255, 0.95) !important;
-  background-image: url('../icons/logo-small.png') !important;
+  background-image: url('../icons/logo-round.png') !important;
   background-repeat: no-repeat !important;
   background-position: 50% 50% !important;
-  background-size: 118% auto !important;
+  background-size: 96% auto !important;
   border-radius: 50% !important;
   padding: 0 !important;
   margin: 0 auto !important;

@@ -23,7 +23,7 @@ export class ProfilScreen extends BaseScreen {
 
     const img = document.createElement('img');
     img.className = 'pf-hero-watermark';
-    img.src = './icons/logo-small.png';
+    img.src = './icons/logo-round.png';
     img.alt = '';
     img.setAttribute('aria-hidden', 'true');
     head.insertBefore(img, head.firstChild);
