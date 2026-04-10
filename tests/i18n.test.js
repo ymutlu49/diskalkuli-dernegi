@@ -40,7 +40,7 @@ test('i18n: load("en") and translate', async () => {
   await i18n.load('en');
   assert.equal(i18n.locale, 'en');
   assert.equal(t('nav.home'), 'Home');
-  assert.equal(t('auth.login'), 'Log in');
+  assert.equal(t('auth.login'), 'Sign in');
 });
 
 test('i18n: placeholder interpolation', async () => {

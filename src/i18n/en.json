@@ -1,12 +1,12 @@
 {
   "app": {
-    "name": "Dyscalculia Association",
-    "tagline": "Everyone Can Learn Math"
+    "name": "Diskalkuli Derneği",
+    "tagline": "Everyone Can Learn Mathematics"
   },
   "nav": {
     "home": "Home",
     "news": "News",
-    "education": "Education",
+    "education": "Training",
     "community": "Community",
     "profile": "Profile",
     "admin": "Admin",
@@ -15,24 +15,27 @@
     "skipToNav": "Skip to navigation"
   },
   "auth": {
-    "login": "Log in",
-    "logout": "Log out",
-    "loggingIn": "Logging in...",
+    "login": "Sign in",
+    "logout": "Sign out",
+    "loggingIn": "Signing in…",
     "email": "Email",
     "emailPlaceholder": "name@example.com",
     "password": "Password",
     "passwordPlaceholder": "Your password",
-    "forgotPassword": "Forgot password?",
+    "forgotPassword": "Forgot your password?",
     "showPassword": "Show password",
     "hidePassword": "Hide password",
-    "viewAsDemo": "View with demo accounts",
-    "welcome": "Welcome",
+    "viewAsDemo": "Explore with demo accounts",
+    "welcome": "Welcome back",
+    "signInHeading": "Sign in to your account",
+    "noAccount": "Don't have an account?",
+    "applyForMembership": "Apply for membership",
     "errors": {
       "emailRequired": "Please enter your email address.",
       "emailInvalid": "Please enter a valid email address.",
       "passwordRequired": "Please enter your password.",
-      "invalidCredentials": "Email or password is incorrect.",
-      "demoModeDisabled": "Live login is not yet available. Please use demo mode.",
+      "invalidCredentials": "The email or password you entered is incorrect.",
+      "demoModeDisabled": "Live sign-in is not available yet. Please use a demo account.",
       "alreadyPending": "A sign-in attempt is already in progress."
     }
   },
@@ -44,10 +47,10 @@
     "edit": "Edit",
     "close": "Close",
     "search": "Search",
-    "loading": "Loading...",
+    "loading": "Loading…",
     "error": "Something went wrong. Please try again.",
     "retry": "Retry",
-    "success": "Success",
+    "success": "Done",
     "required": "This field is required.",
     "optional": "Optional",
     "yes": "Yes",
@@ -58,17 +61,18 @@
     "less": "Less",
     "today": "Today",
     "yesterday": "Yesterday",
-    "tomorrow": "Tomorrow"
+    "tomorrow": "Tomorrow",
+    "language": "Language"
   },
   "validation": {
     "required": "This field is required.",
     "email": "Please enter a valid email address.",
-    "minLength": "Must be at least {n} characters.",
-    "maxLength": "Must be at most {n} characters.",
-    "phone": "Phone number is invalid.",
-    "tcKimlik": "TR National ID is invalid.",
-    "checked": "You must check this box.",
-    "match": "Values do not match."
+    "minLength": "Must be at least {n} characters long.",
+    "maxLength": "Must be no more than {n} characters long.",
+    "phone": "Please enter a valid phone number.",
+    "tcKimlik": "Invalid Turkish National ID number.",
+    "checked": "You must check this box to continue.",
+    "match": "The values do not match."
   },
   "admin": {
     "title": "Admin Panel",
@@ -77,49 +81,49 @@
     "applications": "Applications",
     "finance": "Finance",
     "events": "Events",
-    "board": "Board",
+    "board": "Board of Directors",
     "content": "Content",
     "dues": "Dues",
-    "audit": "Audit",
+    "audit": "Audit Log",
     "reports": "Reports",
-    "exportCsv": "Export as CSV",
-    "notEnoughPermission": "Insufficient permission.",
+    "exportCsv": "Export to CSV",
+    "notEnoughPermission": "You don't have permission to perform this action.",
     "member": {
-      "add": "Add New Member",
-      "edit": "Edit Member",
+      "add": "Add new member",
+      "edit": "Edit member",
       "deleteConfirmTitle": "Delete {name}?",
-      "deleteConfirmMessage": "This cannot be undone. All records for this member will be lost.",
+      "deleteConfirmMessage": "This action cannot be undone. All records associated with this member will be permanently removed.",
       "deleteConfirmAction": "Yes, delete",
-      "deleted": "{name} deleted",
-      "activated": "✓ {name} activated",
-      "deactivated": "⊘ {name} deactivated",
-      "emailExists": "This email is already registered."
+      "deleted": "{name} has been deleted",
+      "activated": "✓ {name} is now active",
+      "deactivated": "⊘ {name} has been deactivated",
+      "emailExists": "An account with this email already exists."
     },
     "application": {
       "approveTitle": "Approve application: {name}",
-      "approveNote": "You may add an optional note about the Board decision.",
-      "approved": "{name} approved",
+      "approveNote": "You may add an optional note about the Board's decision.",
+      "approved": "{name}'s application has been approved",
       "rejectTitle": "Reject application: {name}",
-      "rejectNote": "Rejection reason (logged in the audit trail)",
-      "rejected": "{name} rejected",
+      "rejectNote": "Reason for rejection (will be recorded in the audit log)",
+      "rejected": "{name}'s application has been rejected",
       "pending": "⏳ Pending",
-      "accepted": "✓ Accepted",
-      "denied": "✗ Denied",
-      "empty": "No applications"
+      "accepted": "✓ Approved",
+      "denied": "✗ Rejected",
+      "empty": "No applications to review"
     }
   },
   "pwa": {
     "updateAvailable": "A new version is available.",
-    "updateNow": "Update",
-    "installed": "App installed",
-    "offline": "You are offline",
+    "updateNow": "Update now",
+    "installed": "App installed successfully",
+    "offline": "You're offline",
     "online": "Back online"
   },
   "notifications": {
     "title": "Notifications",
-    "empty": "No notifications yet.",
+    "empty": "You have no notifications.",
     "markAllRead": "Mark all as read",
     "unreadCount": "{n} unread",
-    "allRead": "All read"
+    "allRead": "All caught up"
   }
 }

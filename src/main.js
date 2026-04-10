@@ -118,14 +118,34 @@ async function start() {
   // is benign ("nav.home" is visible in QA).
   i18n.load(i18n.locale).catch((err) => logger.warn('i18n', 'initial load failed', err));
 
-  // Auto-translate [data-i18n] elements when the locale changes.
-  // This covers any element in the HTML that has data-i18n="some.key".
-  i18n.onChange(() => {
+  // Auto-translate declarative i18n attributes when the locale changes.
+  // Covers any element in the HTML with:
+  //   data-i18n              → textContent
+  //   data-i18n-placeholder  → input/textarea placeholder
+  //   data-i18n-aria         → aria-label
+  //   data-i18n-title        → title tooltip
+  const applyTranslations = () => {
     document.querySelectorAll('[data-i18n]').forEach((el) => {
       const key = el.getAttribute('data-i18n');
       if (key) el.textContent = t(key);
     });
-  });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
+      const key = el.getAttribute('data-i18n-placeholder');
+      if (key) el.setAttribute('placeholder', t(key));
+    });
+    document.querySelectorAll('[data-i18n-aria]').forEach((el) => {
+      const key = el.getAttribute('data-i18n-aria');
+      if (key) el.setAttribute('aria-label', t(key));
+    });
+    document.querySelectorAll('[data-i18n-title]').forEach((el) => {
+      const key = el.getAttribute('data-i18n-title');
+      if (key) el.setAttribute('title', t(key));
+    });
+  };
+  i18n.onChange(applyTranslations);
+  // Run once immediately so the catalog we just loaded is painted.
+  // Defer a microtask so initial load() has time to finish.
+  queueMicrotask(applyTranslations);
 
   app.bootstrap();
 

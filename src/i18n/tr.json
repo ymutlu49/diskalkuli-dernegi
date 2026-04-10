@@ -27,6 +27,9 @@
     "hidePassword": "Şifreyi gizle",
     "viewAsDemo": "Demo hesaplarla görüntüle",
     "welcome": "Hoş geldiniz",
+    "signInHeading": "Hesabınıza giriş yapın",
+    "noAccount": "Hesabınız yok mu?",
+    "applyForMembership": "Üyelik başvurusu yapın",
     "errors": {
       "emailRequired": "E-posta adresinizi girin.",
       "emailInvalid": "Geçerli bir e-posta adresi girin.",
@@ -58,7 +61,8 @@
     "less": "Daha az",
     "today": "Bugün",
     "yesterday": "Dün",
-    "tomorrow": "Yarın"
+    "tomorrow": "Yarın",
+    "language": "Dil"
   },
   "validation": {
     "required": "Bu alan zorunludur.",
