@@ -47,19 +47,20 @@
 }
 
 /* ── Login hero ─────────────────────────────────────────────
-   80 → 120. No white disc — the logo is already circular with
-   its own outline. A drop-shadow lifts it off the green hero
-   gradient without adding a wide white halo around it. */
+   80 → 120. A thin white disc hugs the circular logo so it
+   stands out against the green gradient, but the padding is
+   tight (2 px) so the logo fills almost the entire disc —
+   no wide white halo around it. */
 .login-hero-logo {
   width: 120px !important;
   height: 120px !important;
   object-fit: contain;
-  background: transparent !important;
-  border-radius: 0 !important;
-  padding: 0 !important;
-  box-shadow: none !important;
-  filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.3))
-          drop-shadow(0 0 2px rgba(255, 255, 255, 0.4));
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-radius: 50% !important;
+  padding: 2px !important;
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.25),
+    0 8px 28px rgba(0, 0, 0, 0.22) !important;
 }
 
 /* ── Auth header (demo-picker screen) ───────────────────── */
@@ -67,12 +68,12 @@
   width: 100px !important;
   height: 100px !important;
   object-fit: contain;
-  background: transparent !important;
-  border-radius: 0 !important;
-  padding: 0 !important;
-  box-shadow: none !important;
-  filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.28))
-          drop-shadow(0 0 2px rgba(255, 255, 255, 0.4));
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-radius: 50% !important;
+  padding: 2px !important;
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.25),
+    0 6px 24px rgba(0, 0, 0, 0.25) !important;
 }
 
 /* ── Home hero watermark ────────────────────────────────────
