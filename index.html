@@ -1,0 +1,1727 @@
+<!DOCTYPE html>
+<html lang="tr" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <!--
+    NOTE: maximum-scale & user-scalable=no were dropped because they
+    block pinch-zoom for users with low vision (a11y regression).
+    iOS 16px input fix is handled in mobile.css instead.
+  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#1B5E20" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0A2A0E" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="Diskalkuli Derneği — Herkes Matematik Öğrenebilir. Dyscalculia farkındalığı, eğitim ve topluluk için mobil uygulama.">
+  <meta name="author" content="Diskalkuli Derneği">
+  <meta name="keywords" content="diskalkuli, dyscalculia, matematik, öğrenme güçlüğü, eğitim, dernek">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Diskalkuli">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no">
+
+  <!-- Open Graph / social share -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Diskalkuli Derneği">
+  <meta property="og:title" content="Diskalkuli Derneği — Herkes Matematik Öğrenebilir">
+  <meta property="og:description" content="Dyscalculia farkındalığı, eğitim ve topluluk için mobil uygulama.">
+  <meta property="og:image" content="./icons/logo.png">
+  <meta property="og:locale" content="tr_TR">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Diskalkuli Derneği">
+  <meta name="twitter:description" content="Herkes Matematik Öğrenebilir.">
+  <meta name="twitter:image" content="./icons/logo.png">
+
+  <title>Diskalkuli Derneği — Herkes Matematik Öğrenebilir</title>
+
+  <link rel="icon" type="image/png" href="./icons/logo-small.png">
+  <link rel="apple-touch-icon" href="./icons/logo-small.png">
+  <link rel="manifest" href="./manifest.webmanifest">
+
+  <!-- Preconnect + non-blocking font load. display=swap in the URL
+       already prevents FOIT; preconnect shaves one round-trip. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./styles/tokens.css">
+  <link rel="stylesheet" href="./styles/app.css">
+  <link rel="stylesheet" href="./styles/enhancements.css">
+  <link rel="stylesheet" href="./styles/mobile.css">
+
+  <!-- Structured data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Diskalkuli Derneği",
+    "alternateName": "Dyscalculia Association of Turkey",
+    "description": "Dyscalculia farkındalığı, eğitim ve topluluk için kurulmuş dernek.",
+    "slogan": "Herkes Matematik Öğrenebilir",
+    "foundingDate": "2017",
+    "areaServed": "TR",
+    "inLanguage": "tr"
+  }
+  </script>
+</head>
+<body>
+<a class="skip-link" href="#global-nav">Navigasyona geç</a>
+<div id="app" role="application" aria-label="Diskalkuli Derneği uygulaması">
+
+<!-- ═══════════ SPLASH ═══════════ -->
+<div class="screen active" id="screen-splash" role="region" aria-label="Karşılama ekranı">
+  <div class="splash-top-bar" aria-hidden="true"></div>
+  <div class="splash-center">
+    <img class="splash-tree" id="splash-logo"
+         src="./icons/logo.png" alt="Diskalkuli Derneği logosu"
+         role="button" tabindex="0"
+         data-goto="login">
+    <div class="splash-year">2017</div>
+    <h1 class="splash-org">Diskalkuli Derneği</h1>
+    <p class="splash-tagline">Herkes Matematik Öğrenebilir</p>
+    <div class="splash-progress" role="progressbar" aria-label="Yükleniyor" aria-valuemin="0" aria-valuemax="100"><div class="splash-bar"></div></div>
+  </div>
+  <div class="splash-footer">
+    <div class="splash-dev-label">Geliştiren</div>
+    <div class="splash-dev-name">Prof. Dr. Yılmaz Mutlu</div>
+  </div>
+  <div class="splash-bottom-bar" aria-hidden="true"></div>
+</div>
+
+<!-- ═══════════ GİRİŞ ═══════════ -->
+<div class="screen" id="screen-login" role="region" aria-labelledby="login-heading">
+
+  <!-- Yeşil üst alan -->
+  <div class="login-hero">
+    <div class="login-hero-circle"></div>
+    <img class="login-hero-logo" src="./icons/logo-small.png" alt="Diskalkuli Derneği">
+    <div class="login-hero-name">Diskalkuli Derneği</div>
+    <div class="login-hero-tag">Herkes Matematik Öğrenebilir</div>
+  </div>
+
+  <!-- Form -->
+  <div class="login-body">
+    <div class="login-title">Hesabınıza giriş yapın</div>
+
+    <div class="login-field">
+      <div class="login-field-label">E-posta</div>
+      <div class="login-input-wrap">
+        <svg class="login-input-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+        <input class="login-input" id="login-email" type="email"
+               placeholder="ornek@mail.com"
+               autocomplete="email" inputmode="email">
+      </div>
+    </div>
+
+    <div class="login-field">
+      <div class="login-field-label">Şifre</div>
+      <div class="login-input-wrap">
+        <svg class="login-input-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <input class="login-input" id="login-password" type="password"
+               placeholder="••••••••"
+               autocomplete="current-password"
+               onkeydown="if(event.key==='Enter') doLogin()">
+        <button class="login-pw-btn" onclick="toggleLoginPw()" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div id="login-error" class="login-error" style="display:none"></div>
+
+    <button class="login-btn" id="login-submit-btn" onclick="doLogin()">
+      Giriş Yap
+    </button>
+
+    <div class="login-forgot">
+      <a href="https://diskalkulidernegi.org" target="_blank">Şifremi unuttum</a>
+    </div>
+
+    <div class="login-divider"><span>veya</span></div>
+
+    <button class="login-demo-btn" onclick="goTo('auth')">
+      Demo hesaplarla görüntüle
+    </button>
+
+    <div class="login-register">
+      Hesabınız yok mu?
+      <a href="https://diskalkulidernegi.org/uyelik" target="_blank">Üye ol</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════ AUTH ═══════════ -->
+<div class="screen" id="screen-auth" role="region" aria-labelledby="auth-heading">
+
+  <!-- Üst yeşil header -->
+  <div class="auth-header">
+    <div class="auth-header-bg"></div>
+    <img class="auth-header-logo" src="./icons/logo-small.png" alt="Diskalkuli Derneği">
+    <div class="auth-header-title">Diskalkuli Derneği</div>
+    <div class="auth-header-sub">Herkes Matematik Öğrenebilir</div>
+  </div>
+
+  <!-- Giriş formu + demo kartlar -->
+  <div class="auth-body">
+
+    <!-- E-posta / Şifre formu -->
+    <div class="auth-form-section">
+      <div class="auth-form-title">Hesabınıza giriş yapın</div>
+
+      <div class="auth-input-wrap">
+        <svg class="auth-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+        <input class="auth-input" id="auth-email" type="email"
+               placeholder="E-posta adresiniz"
+               autocomplete="email" inputmode="email">
+      </div>
+
+      <div class="auth-input-wrap">
+        <svg class="auth-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <input class="auth-input" id="auth-password" type="password"
+               placeholder="Şifreniz"
+               autocomplete="current-password"
+               onkeydown="if(event.key==='Enter')loginWithEmail()">
+        <button class="auth-pw-toggle" onclick="togglePw()" id="pw-toggle-btn" type="button">
+          <svg id="pw-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        </button>
+      </div>
+
+      <div id="auth-error" class="auth-error" style="display:none"></div>
+
+      <button class="auth-btn-primary" onclick="loginWithEmail()">
+        <span>Giriş Yap</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+
+      <div class="auth-forgot">
+        <a href="https://diskalkulidernegi.org" target="_blank">Şifremi unuttum</a>
+      </div>
+    </div>
+
+    <!-- Ayırıcı -->
+    <div class="auth-divider"><span>veya demo olarak giriş yapın</span></div>
+
+    <!-- Demo rol kartları -->
+    <div class="auth-roles">
+
+      <div class="auth-role-card" onclick="login('yonetim')">
+        <div class="auth-role-icon" style="background:linear-gradient(135deg,var(--green-dark),var(--green))">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        </div>
+        <div class="auth-role-info">
+          <div class="auth-role-name">YK Başkanı</div>
+          <div class="auth-role-desc">Prof. Dr. Yılmaz Mutlu</div>
+        </div>
+        <span class="auth-role-badge" style="background:var(--green-light);color:var(--green-dark)">Tam Yetki</span>
+      </div>
+
+      <div class="auth-role-card" onclick="login('ihsan')">
+        <div class="auth-role-icon" style="background:linear-gradient(135deg,#1B5E20,#388E3C)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg>
+        </div>
+        <div class="auth-role-info">
+          <div class="auth-role-name">Denetleme K. Başkanı</div>
+          <div class="auth-role-desc">Dr. İhsan Söylemez</div>
+        </div>
+        <span class="auth-role-badge" style="background:var(--green-light);color:var(--green-dark)">Tam Yetki</span>
+      </div>
+
+      <div class="auth-role-card" onclick="login('temsilci')">
+        <div class="auth-role-icon" style="background:linear-gradient(135deg,var(--brown-dark),var(--brown))">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="auth-role-info">
+          <div class="auth-role-name">İl Temsilcisi</div>
+          <div class="auth-role-desc">Dr. Ayşe Kaya · Ankara</div>
+        </div>
+        <span class="auth-role-badge" style="background:var(--brown-light);color:var(--brown-dark)">Temsilci</span>
+      </div>
+
+      <div class="auth-role-card" onclick="login('uye')">
+        <div class="auth-role-icon" style="background:linear-gradient(135deg,#388E3C,#4CAF50)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div class="auth-role-info">
+          <div class="auth-role-name">Dernek Üyesi</div>
+          <div class="auth-role-desc">Mehmet Demir · İstanbul</div>
+        </div>
+        <span class="auth-role-badge" style="background:var(--green-light);color:var(--green-mid)">Üye</span>
+      </div>
+
+      <div class="auth-role-card auth-role-guest" onclick="login('genel')">
+        <div class="auth-role-icon" style="background:linear-gradient(135deg,var(--gray-400),var(--gray-300))">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="auth-role-info">
+          <div class="auth-role-name">Genel Ziyaretçi</div>
+          <div class="auth-role-desc">Üye olmadan temel erişim</div>
+        </div>
+        <span class="auth-role-badge" style="background:var(--gray-100);color:var(--gray-400)">Ziyaretçi</span>
+      </div>
+
+    </div>
+
+    <div class="auth-footer-note">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      Gerçek üyelik için <a href="https://diskalkulidernegi.org" style="color:var(--green-dark);font-weight:700">diskalkulidernegi.org</a> adresini ziyaret ediniz.
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════ ANA EKRAN ═══════════ -->
+<div class="screen" id="screen-home" role="region" aria-label="Ana sayfa">
+  <div class="topbar">
+    <img class="topbar-logo" src="./icons/logo-small.png" alt="DD">
+    <div class="topbar-title">Diskalkuli Derneği <small id="tb-role">Üye Portalı</small></div>
+    <div class="topbar-actions">
+      <button class="icon-btn" onclick="openModal('notif-modal')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <div class="notif-dot" id="notif-dot"></div>
+      </button>
+    </div>
+  </div>
+  <div class="screen-body">
+    <div class="hero anim">
+      <div class="hero-text">
+        <div class="hero-greet">Hoş geldiniz</div>
+        <div class="hero-name" id="hero-name">Prof. Dr. Yılmaz Mutlu</div>
+        <div class="hero-badge"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span id="hero-role">Yönetim Kurulu</span></div>
+      </div>
+      <div class="hero-avatar" id="hero-av">YM</div>
+    </div>
+    <div class="stats anim d1">
+      <div class="stat" onclick="goTo('egitim')"><div class="stat-n">1000<sup>+</sup></div><div class="stat-l">Eğitim</div></div>
+      <div class="stat" onclick="goTo('uye')"><div class="stat-n">4.2<sup>K</sup></div><div class="stat-l">Üye</div></div>
+      <div class="stat" onclick="goTo('kongre')"><div class="stat-n">IV<sup>.</sup></div><div class="stat-l">Kongre</div></div>
+    </div>
+    <div style="height:16px"></div>
+    <div class="section-head anim d2">
+      <div class="section-title">Modüller</div>
+    </div>
+    <div class="mod-grid anim d2" id="mod-grid"></div>
+    <div style="height:16px"></div>
+    <div class="section-head anim d3">
+      <div class="section-title">Son Duyurular</div>
+      <div class="section-more" onclick="goTo('haberler')">Tümü</div>
+    </div>
+    <div class="ann-scroll anim d3" id="ann-scroll"></div>
+  </div>
+
+</div>
+
+<!-- ═══════════ HABERLER ═══════════ -->
+<div class="screen" id="screen-haberler" role="region" aria-label="Haberler ve Duyurular">
+  <div class="topbar">
+    <button class="back-btn" onclick="goBack()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <div class="topbar-center">Haberler & Duyurular</div>
+    <div style="width:32px"></div>
+  </div>
+  <div class="screen-body">
+    <div class="chips-row" id="news-chips"></div>
+    <div style="height:12px"></div>
+    <div id="news-list"></div>
+  </div>
+</div>
+
+<!-- ═══════════ FARKINDALIK ═══════════ -->
+<div class="screen" id="screen-farkindalik" role="region" aria-label="Farkındalık">
+  <div class="topbar">
+    <button class="back-btn" onclick="goBack()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <div class="topbar-center">Farkındalık & Bilgi</div>
+    <div style="width:32px"></div>
+  </div>
+  <div class="screen-body">
+
+    <!-- Hero -->
+    <div style="margin:14px 16px 0;background:linear-gradient(135deg,var(--green-dark),var(--green));border-radius:var(--r-lg);padding:22px;position:relative;overflow:hidden">
+      <div style="font-family:var(--font-d);font-size:18px;font-weight:900;color:white;margin-bottom:8px">Diskalkuli Nedir?</div>
+      <div style="font-size:13px;color:rgba(255,255,255,.8);line-height:1.65">Yeterli zekâ düzeyine ve öğrenme fırsatına sahip olmalarına karşın bireylerde matematiksel becerilerin edinimini kalıcı olarak güçleştiren <strong style="color:white">nörogelişimsel bir öğrenme güçlüğüdür.</strong></div>
+      <div style="display:flex;gap:12px;margin-top:14px">
+        <div style="background:rgba(255,255,255,.15);border-radius:var(--r-md);padding:10px 14px;flex:1;text-align:center">
+          <div style="font-family:var(--font-d);font-size:18px;font-weight:900;color:white">%5-7</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.7);margin-top:2px">Yaygınlık</div>
+        </div>
+        <div style="background:rgba(255,255,255,.15);border-radius:var(--r-md);padding:10px 14px;flex:1;text-align:center">
+          <div style="font-family:var(--font-d);font-size:18px;font-weight:900;color:white">≈Disleksi</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.7);margin-top:2px">Görülme sıklığı</div>
+        </div>
+        <div style="background:rgba(255,255,255,.15);border-radius:var(--r-md);padding:10px 14px;flex:1;text-align:center">
+          <div style="font-family:var(--font-d);font-size:18px;font-weight:900;color:white">IQ+</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.7);margin-top:2px">Zeka bağımsız</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Belirtiler -->
+    <div style="margin:14px 16px 0">
+      <div style="font-family:var(--font-d);font-size:14px;font-weight:900;color:var(--green-dark);margin-bottom:10px">🔍 Temel Belirtiler</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div style="background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:12px">
+          <div style="font-size:18px;margin-bottom:6px">🔢</div>
+          <div style="font-family:var(--font-d);font-size:12px;font-weight:800;color:var(--green-dark)">Sayı Duyusu Eksikliği</div>
+          <div style="font-size:11px;color:var(--gray-600);margin-top:3px;line-height:1.5">Sayılar arası büyüklük ilişkisini kuramama</div>
+        </div>
+        <div style="background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:12px">
+          <div style="font-size:18px;margin-bottom:6px">⏰</div>
+          <div style="font-family:var(--font-d);font-size:12px;font-weight:800;color:var(--green-dark)">Zaman/Saat Okuma</div>
+          <div style="font-size:11px;color:var(--gray-600);margin-top:3px;line-height:1.5">Analog saati okumada süregelen güçlük</div>
+        </div>
+        <div style="background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:12px">
+          <div style="font-size:18px;margin-bottom:6px">✋</div>
+          <div style="font-family:var(--font-d);font-size:12px;font-weight:800;color:var(--green-dark)">Parmakla Sayma</div>
+          <div style="font-size:11px;color:var(--gray-600);margin-top:3px;line-height:1.5">İleri yaşta da parmak kullanma bağımlılığı</div>
+        </div>
+        <div style="background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:12px">
+          <div style="font-size:18px;margin-bottom:6px">😰</div>
+          <div style="font-family:var(--font-d);font-size:12px;font-weight:800;color:var(--green-dark)">Matematik Kaygısı</div>
+          <div style="font-size:11px;color:var(--gray-600);margin-top:3px;line-height:1.5">Yüksek düzeyde matematik korkusu ve kaygı</div>
+        </div>
+        <div style="background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:12px">
+          <div style="font-size:18px;margin-bottom:6px">🧮</div>
+          <div style="font-family:var(--font-d);font-size:12px;font-weight:800;color:var(--green-dark)">Aritmetik Güçlüğü</div>
+          <div style="font-size:11px;color:var(--gray-600);margin-top:3px;line-height:1.5">Dört işlemde hata ve yavaş işlem hızı</div>
+        </div>
+        <div style="background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:12px">
+          <div style="font-size:18px;margin-bottom:6px">🗺</div>
+          <div style="font-family:var(--font-d);font-size:12px;font-weight:800;color:var(--green-dark)">Yön Bulmada Güçlük</div>
+          <div style="font-size:11px;color:var(--gray-600);margin-top:3px;line-height:1.5">Harita, diyagram, tablo okuyamama</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SSS -->
+    <div style="margin:16px 16px 0;font-family:var(--font-d);font-size:14px;font-weight:900;color:var(--green-dark)">❓ Sıkça Sorulan Sorular</div>
+
+    <div style="margin:10px 16px 0;display:flex;flex-direction:column;gap:8px">
+
+      <div class="faq-item">
+        <div class="faq-q" role="button" tabindex="0">
+          <span>Diskalkuli kalıcı mı?</span>
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a">Diskalkuli nörogelişimsel bir durumdur; tamamen geçmez. Ancak erken ve uygun müdahale ile bireyler telafi stratejileri geliştirebilir ve matematik performansı önemli ölçüde artabilir. "Diskalkuli = Matematik yapamama" değildir.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" role="button" tabindex="0">
+          <span>Diskalkuli nasıl tanılanır?</span>
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a">Kapsamlı bir psikoeğitimsel değerlendirme gereklidir. WISC-V, KeyMath-3, Temel Sayı İşleme testleri kullanılır. Mutlu & Akgün (2017) tarafından geliştirilen Çoklu Süzgeç Modeli tek bir testin yetersizliğini ortaya koymaktadır. RAM'larda uzmanlar aracılığıyla tanılama alınabilir.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" role="button" tabindex="0">
+          <span>Diskalkuli ile düşük zekâ arasındaki fark nedir?</span>
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a">Diskalkülili bireyler normal veya üstün zekâya sahiptir. Güçlük yalnızca matematiksel işlemeye özgüdür; okuma, dil ve diğer akademik alanlarda çoğunlukla başarılıdırlar. Bu, diskalkülinin zekâdan bağımsız, özgül bir nörogelişimsel durum olduğunu gösterir.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" role="button" tabindex="0">
+          <span>Diskalkülili çocuğuma nasıl yardımcı olabilirim?</span>
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a">Somut materyaller (Cuisenaire çubukları, sayı doğrusu) kullanın. Zaman baskısından kaçının. Küçük başarıları kutlayın. CRA (Somut→Temsili→Soyut) öğretim dizisini uygulayan bir uzmanla çalışın. "Neden anlamıyorsun?" yerine "Birlikte çözelim" deyin.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" role="button" tabindex="0">
+          <span>Türkiye'de yasal haklar neler?</span>
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a">MEB 2018/26 genelgesi kapsamında tanılı öğrenciler; sınav süre uzatımı, hesap makinesi kullanımı, bireyselleştirilmiş eğitim programı (BEP) ve özel eğitim desteğine erişim haklarına sahiptir. RAM (Rehberlik ve Araştırma Merkezi) aracılığıyla bu haklardan yararlanılabilir.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" role="button" tabindex="0">
+          <span>Diskalkuli ve disleksi birlikte görülebilir mi?</span>
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a">Evet. Araştırmalar diskalkülili bireylerin %40-60'ında disleksi de bulunduğunu göstermektedir. Dikkat Eksikliği ve Hiperaktivite Bozukluğu (DEHB) ile birliktelik de sıktır. Bu nedenle kapsamlı bir değerlendirme önem taşır.</div>
+      </div>
+
+    </div>
+
+    <!-- Nörobiyoloji Kutusu -->
+    <div style="margin:14px 16px;background:var(--brown-light);border-radius:var(--r-lg);padding:16px;border-left:3px solid var(--brown)">
+      <div style="font-family:var(--font-d);font-size:13px;font-weight:800;color:var(--brown-dark);margin-bottom:6px">🧠 Nörobiyolojik Temel</div>
+      <div style="font-size:12px;color:var(--brown-dark);line-height:1.7">Diskalkülide <strong>parietal korteks</strong> (sayısal büyüklük işleme), <strong>prefrontal korteks</strong> (çalışma belleği) ve <strong>görsel korteks</strong> (sembol işleme) arasındaki bağlantılarda farklılıklar gözlemlenir. Bu biyolojik temel, diskalkülinin "tembellik" veya "ilgisizlik" olmadığını kanıtlar.</div>
+    </div>
+
+    <div style="height:8px"></div>
+  </div>
+</div>
+
+<div class="screen" id="screen-egitim" role="region" aria-label="Eğitim">
+  <div class="topbar">
+    <button class="back-btn" onclick="goBack()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <div class="topbar-center">Eğitim Platformu</div>
+    <div style="width:32px"></div>
+  </div>
+  <div class="screen-body">
+    <div class="search-wrap">
+      <div class="form-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" placeholder="Eğitim ara...">
+      </div>
+    </div>
+    <div class="chips-row" id="course-chips"></div>
+    <div style="height:12px"></div>
+    <div id="course-list"></div>
+  </div>
+</div>
+
+<!-- ═══════════ ADIM ═══════════ -->
+<div class="screen" id="screen-adim" role="region" aria-label="ADIM Müdahale Modeli">
+  <div class="topbar">
+    <button class="back-btn" onclick="goBack()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <div class="topbar-center">ADIM Müdahale Rehberi</div>
+    <div style="width:32px"></div>
+  </div>
+  <div class="screen-body">
+    <div class="hero" style="background:linear-gradient(135deg,var(--brown) 0%,var(--brown-dark) 100%)">
+      <div class="hero-text">
+        <div class="hero-greet">Altı Adımlı Sistematik</div>
+        <div class="hero-name" style="font-size:16px">Diskalkuli Müdahale Modeli</div>
+        <div class="hero-badge" style="background:rgba(255,255,255,.2)">Prof. Dr. Yılmaz Mutlu</div>
+      </div>
+    </div>
+    <div style="height:16px"></div>
+    <div class="adim-container" id="adim-list"></div>
+  </div>
+</div>
+
+<!-- ═══════════ DOKUNSAY ═══════════ -->
+<div class="screen" id="screen-dokunsay" role="region" aria-label="DokunSay Manipülatifler">
+  <div class="topbar">
+    <button class="back-btn" onclick="goBack()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <div class="topbar-center">DokunSay Dijital Modül</div>
+    <div style="width:32px"></div>
+  </div>
+  <div class="screen-body">
+    <div style="margin:14px 16px 0;background:linear-gradient(135deg,var(--green) 0%,var(--green-dark) 100%);border-radius:var(--r-lg);padding:20px">
+      <div style="font-family:var(--font-d);font-size:17px;font-weight:900;color:white;margin-bottom:5px">DokunSay</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.7);line-height:1.5">Patentli çok duyusal öğretim materyalleri — Sayı çubukları, Aritmetik Tabletleri ve dijital etkileşimli araçlar.</div>
+    </div>
+    <div style="height:14px"></div>
+    <div class="section-head"><div class="section-title">Dijital Modüller</div></div>
+    <div class="manipulative-grid" id="manip-grid"></div>
+  </div>
+</div>
+
+<!-- ═══════════ SOMUT ARAÇLAR ═══════════ -->
+<div class="screen" id="screen-araclar" role="region" aria-label="Araçlar">
+  <div class="topbar">
+    <button class="back-btn" onclick="goBack()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <div class="topbar-center">Somut Araçlar</div>
+    <div style="width:32px"></div>
+  </div>
+  <div class="screen-body">
+
+    <!-- Hero -->
+    <div style="margin:14px 16px 0;background:linear-gradient(135deg,var(--green-dark),var(--green));border-radius:var(--r-lg);padding:20px;">
+      <div style="font-family:var(--font-d);font-size:18px;font-weight:900;color:white;margin-bottom:6px">Kanıta Dayalı Müdahale Araçları</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.75);line-height:1.6">Uluslararası literatürde etkinliği kanıtlanmış dijital ve fiziksel araçlar. CRA yaklaşımı temelinde somuttan soyuta öğretim.</div>
+    </div>
+
+    <!-- Filtre -->
+    <div class="arac-filter-row">
+      <div class="arac-chip on" data-cat="tumu"     role="button" tabindex="0" aria-pressed="true">Tümü</div>
+      <div class="arac-chip"    data-cat="dijital"  role="button" tabindex="0" aria-pressed="false">Dijital</div>
+      <div class="arac-chip"    data-cat="fiziksel" role="button" tabindex="0" aria-pressed="false">Fiziksel</div>
+      <div class="arac-chip"    data-cat="strateji" role="button" tabindex="0" aria-pressed="false">Strateji</div>
+    </div>
+
+    <!-- ── DİJİTAL ARAÇLAR ── -->
+    <div class="arac-section-title">🖥 Dijital Araçlar</div>
+
+    <!-- Calcularis 2.0 -->
+    <div class="arac-card" data-cat="dijital">
+      <div class="arac-card-top">
+        <div class="arac-icon" style="background:linear-gradient(135deg,#1565C0,#1976D2)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div style="flex:1">
+          <div class="arac-name">Calcularis 2.0</div>
+          <div class="arac-meta">von Aster & Kucian · ETH Zürich</div>
+        </div>
+        <span class="arac-badge arac-badge-dijital">Dijital</span>
+      </div>
+      <div class="arac-desc">Adaptif oyun tabanlı öğretim yazılımı. Sayı doğrusu temsili ve sayısal büyüklük anlayışını geliştiren 8–12 yaş arası çocuklara yönelik klinik onaylı program. Beyin görüntüleme çalışmalarıyla desteklenmiştir.</div>
+      <div class="arac-tags">
+        <span class="arac-tag">8–12 yaş</span>
+        <span class="arac-tag">Adaptif</span>
+        <span class="arac-tag">ANS gelişimi</span>
+        <span class="arac-tag">Klinik onaylı</span>
+      </div>
+      <div class="arac-ref">von Aster & Kucian (2016) · Frontiers in Psychology</div>
+    </div>
+
+    <!-- The Number Race -->
+    <div class="arac-card" data-cat="dijital">
+      <div class="arac-card-top">
+        <div class="arac-icon" style="background:linear-gradient(135deg,#6A1B9A,#8E24AA)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div style="flex:1">
+          <div class="arac-name">The Number Race</div>
+          <div class="arac-meta">Wilson & Dehaene · UNICOG Lab</div>
+        </div>
+        <span class="arac-badge arac-badge-dijital">Ücretsiz</span>
+      </div>
+      <div class="arac-desc">Yaklaşık sayı sistemi (ANS) defisitini hedef alan oyun tabanlı yazılım. Sayısal büyüklük karşılaştırması ve sayı doğrusu tahmini üzerine yoğunlaşır. Açık kaynak, ücretsiz kullanılabilir.</div>
+      <div class="arac-tags">
+        <span class="arac-tag">5–9 yaş</span>
+        <span class="arac-tag">ANS defisiti</span>
+        <span class="arac-tag">Ücretsiz</span>
+        <span class="arac-tag">Açık kaynak</span>
+      </div>
+      <div class="arac-ref">Wilson et al. (2006) · Behavioral and Brain Functions</div>
+    </div>
+
+    <!-- EDSense -->
+    <div class="arac-card" data-cat="dijital">
+      <div class="arac-card-top">
+        <div class="arac-icon" style="background:linear-gradient(135deg,#00695C,#00897B)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        </div>
+        <div style="flex:1">
+          <div class="arac-name">EDSense</div>
+          <div class="arac-meta">Erken Tespit & Müdahale Platformu</div>
+        </div>
+        <span class="arac-badge arac-badge-dijital">Web</span>
+      </div>
+      <div class="arac-desc">Dinamik Bayes Ağları (DBN) kullanan akıllı öğretim sistemi. 158 çocuk üzerinde test edilmiş; Smartick Diskalkuli Değerlendirme Aracı ile birlikte kullanılır. Bireyselleştirilmiş gamified öğretim sunar.</div>
+      <div class="arac-tags">
+        <span class="arac-tag">6–10 yaş</span>
+        <span class="arac-tag">Yapay Zekâ</span>
+        <span class="arac-tag">Gamified</span>
+        <span class="arac-tag">Adaptif</span>
+      </div>
+      <div class="arac-ref">PMC 2024 · Frontiers in Education</div>
+    </div>
+
+    <!-- Graphogame-Math -->
+    <div class="arac-card" data-cat="dijital">
+      <div class="arac-card-top">
+        <div class="arac-icon" style="background:linear-gradient(135deg,#E65100,#F57C00)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div style="flex:1">
+          <div class="arac-name">Graphogame-Math</div>
+          <div class="arac-meta">Jyväskylä Üniversitesi · Finlandiya</div>
+        </div>
+        <span class="arac-badge arac-badge-dijital">Erken Müdahale</span>
+      </div>
+      <div class="arac-desc">Erken sayı duyusu gelişimi için oyun tabanlı dijital araç. Harf-ses eşleştirmesinden esinlenerek geliştirilmiş; sembol-miktar ilişkisini pekiştirmeye odaklanır. Okul öncesi ve 1. sınıf için ideal.</div>
+      <div class="arac-tags">
+        <span class="arac-tag">4–7 yaş</span>
+        <span class="arac-tag">Erken müdahale</span>
+        <span class="arac-tag">Sembol-miktar</span>
+      </div>
+      <div class="arac-ref">Räsänen et al. (2009) · Developmental Science</div>
+    </div>
+
+    <!-- ── FİZİKSEL ARAÇLAR ── -->
+    <div class="arac-section-title">🧩 Fiziksel Manipülatifler</div>
+
+    <!-- Cuisenaire Çubukları -->
+    <div class="arac-card" data-cat="fiziksel">
+      <div class="arac-card-top">
+        <div class="arac-icon" style="background:linear-gradient(135deg,var(--brown-dark),var(--brown))">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="8" width="4" height="13"/><rect x="8" y="5" width="4" height="16"/><rect x="14" y="2" width="4" height="19"/><rect x="20" y="10" width="2" height="11"/></svg>
+        </div>
+        <div style="flex:1">
+          <div class="arac-name">Cuisenaire Çubukları</div>
+          <div class="arac-meta">Georges Cuisenaire · CRA Temeli</div>
+        </div>
+        <span class="arac-badge arac-badge-fiziksel">Fiziksel</span>
+      </div>
+      <div class="arac-desc">1–10 uzunlukta renkli ahşap çubuklar. Sayılar arası ilişki, dört işlem, kesirler ve oran kavramını somutlaştırır. Diskalkülili öğrencilerde dokunsal-görsel giriş yoluyla nöral bağlantıyı güçlendirir. DokunSay modülleriyle doğrudan entegre.</div>
+      <div class="arac-tags">
+        <span class="arac-tag">5–12 yaş</span>
+        <span class="arac-tag">Dokunsal</span>
+        <span class="arac-tag">Çok işlemli</span>
+        <span class="arac-tag">DokunSay uyumlu</span>
+      </div>
+      <div class="arac-ref">Bird, R. (2017) · The Dyscalculia Toolkit</div>
+    </div>
+
+    <!-- On Çerçeve -->
+    <div class="arac-card" data-cat="fiziksel">
+      <div class="arac-card-top">
+        <div class="arac-icon" style="background:linear-gradient(135deg,var(--green),var(--green-mid))">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="12" y1="5" x2="12" y2="19"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+        </div>
+        <div style="flex:1">
+          <div class="arac-name">On Çerçeve (Ten Frame)</div>
+          <div class="arac-meta">Sayı Yapısı Görselleştirme</div>
+        </div>
+        <span class="arac-badge arac-badge-fiziksel">Fiziksel</span>
+      </div>
+      <div class="arac-desc">5+5 yapısını kullanarak 10'luk sayı tabanını somutlaştıran iki satırlı çerçeve aracı. Subitizasyon, ekleme ve tamamlama stratejilerini geliştirmek için kullanılır. Hem kâğıt hem manyetik formda uygulanabilir.</div>
+      <div class="arac-tags">
+        <span class="arac-tag">4–8 yaş</span>
+        <span class="arac-tag">Subitizasyon</span>
+        <span class="arac-tag">10 tabanı</span>
+      </div>
+      <div class="arac-ref">Clements & Sarama (2009) · Learning and Teaching Early Math</div>
+    </div>
+
+    <!-- Taban 10 Blokları -->
+    <div class="arac-card" data-cat="fiziksel">
+      <div class="arac-card-top">
+        <div class="arac-icon" style="background:linear-gradient(135deg,#4527A0,#5E35B1)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="14" width="5" height="8"/><rect x="9" y="9" width="5" height="13"/><rect x="16" y="4" width="5" height="18"/></svg>
+        </div>
+        <div style="flex:1">
+          <div class="arac-name">Taban 10 Blokları</div>
+          <div class="arac-meta">Basamak Değeri · Dört İşlem</div>
+        </div>
+        <span class="arac-badge arac-badge-fiziksel">Fiziksel</span>
+      </div>
+      <div class="arac-desc">Birler (küp), onlar (çubuk), yüzler (kare) ve binler (büyük küp) birimlerinden oluşan manipülatif seti. Basamak değeri, elde var/borç al ve büyük sayılarla işlem yapmayı somutlaştırır. CRA dizisinin "C" aşaması.</div>
+      <div class="arac-tags">
+        <span class="arac-tag">6–11 yaş</span>
+        <span class="arac-tag">Basamak değeri</span>
+        <span class="arac-tag">CRA-C aşaması</span>
+      </div>
+      <div class="arac-ref">Witzel et al. (2003) · Learning Disabilities Research</div>
+    </div>
+
+    <!-- Sayı Doğrusu -->
+    <div class="arac-card" data-cat="fiziksel">
+      <div class="arac-card-top">
+        <div class="arac-icon" style="background:linear-gradient(135deg,var(--green-dark),#2E7D32)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="2" y1="12" x2="22" y2="12"/><polyline points="18 8 22 12 18 16"/><line x1="6" y1="8" x2="6" y2="16"/><line x1="12" y1="8" x2="12" y2="16"/></svg>
+        </div>
+        <div style="flex:1">
+          <div class="arac-name">Boş Sayı Doğrusu</div>
+          <div class="arac-meta">Pozisyonel Sayı Anlayışı</div>
+        </div>
+        <span class="arac-badge arac-badge-fiziksel">Fiziksel</span>
+      </div>
+      <div class="arac-desc">Önceden işaretlenmiş sayıları olmayan açık sayı doğrusu. Öğrencinin sayılar arası ilişkiyi ve büyüklük tahminini aktif olarak kurmasını sağlar. Sayı doğrusu tahmini ANS'nin en güvenilir ölçütlerinden biridir.</div>
+      <div class="arac-tags">
+        <span class="arac-tag">5–14 yaş</span>
+        <span class="arac-tag">Büyüklük tahmini</span>
+        <span class="arac-tag">ANS ölçümü</span>
+      </div>
+      <div class="arac-ref">Siegler & Booth (2004) · Journal of Experimental Child Psychology</div>
+    </div>
+
+    <!-- ── STRATEJİLER ── -->
+    <div class="arac-section-title">📐 Kanıta Dayalı Stratejiler</div>
+
+    <!-- CRA Yöntemi -->
+    <div class="arac-card" data-cat="strateji">
+      <div class="arac-card-top">
+        <div class="arac-icon" style="background:linear-gradient(135deg,var(--brown),var(--brown-mid))">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div style="flex:1">
+          <div class="arac-name">CRA Öğretim Dizisi</div>
+          <div class="arac-meta">Somut → Temsili → Soyut</div>
+        </div>
+        <span class="arac-badge arac-badge-strateji">Strateji</span>
+      </div>
+      <div class="arac-desc">Diskalkülili öğrenciler için en güçlü kanıta sahip öğretim yaklaşımı. Önce fiziksel manipülatifler (Somut), ardından çizim/diyagram (Temsili), son olarak semboller ve sayılar (Soyut). Her aşama yeterince pekiştirilerek geçilir.</div>
+      <div class="arac-tags">
+        <span class="arac-tag">Tüm yaşlar</span>
+        <span class="arac-tag">En yüksek kanıt</span>
+        <span class="arac-tag">Çok aşamalı</span>
+      </div>
+      <div class="arac-ref">Witzel et al. (2003) · Butterworth & Yeo (2004)</div>
+    </div>
+
+    <!-- Çokduyusal Öğretim -->
+    <div class="arac-card" data-cat="strateji">
+      <div class="arac-card-top">
+        <div class="arac-icon" style="background:linear-gradient(135deg,#AD1457,#C2185B)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <div style="flex:1">
+          <div class="arac-name">Çokduyusal Öğretim (VAKT)</div>
+          <div class="arac-meta">Görsel · İşitsel · Kinestetik · Dokunsal</div>
+        </div>
+        <span class="arac-badge arac-badge-strateji">Strateji</span>
+      </div>
+      <div class="arac-desc">Görsel (sayı doğrusu, şemalar), işitsel (matematik konuşması, sözel açıklama), kinestetik (hareket temelli öğrenme) ve dokunsal (fiziksel manipülatifler) kanalların eş zamanlı kullanımı. Nöral bağlantıları güçlendirir.</div>
+      <div class="arac-tags">
+        <span class="arac-tag">Çok kanal</span>
+        <span class="arac-tag">Nöral pekiştirme</span>
+        <span class="arac-tag">Özelleştirilebilir</span>
+      </div>
+      <div class="arac-ref">Geary et al. (2024) · Educational Psychology Review</div>
+    </div>
+
+    <!-- Sayı Örüntüsü Kartları -->
+    <div class="arac-card" data-cat="strateji">
+      <div class="arac-card-top">
+        <div class="arac-icon" style="background:linear-gradient(135deg,#00838F,#0097A7)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        </div>
+        <div style="flex:1">
+          <div class="arac-name">Subitizasyon Kartları</div>
+          <div class="arac-meta">Anlık Sayı Tanıma Eğitimi</div>
+        </div>
+        <span class="arac-badge arac-badge-strateji">Strateji</span>
+      </div>
+      <div class="arac-desc">Nokta dizilimleriyle anlık sayı tanıma (subitizasyon) becerisini geliştiren kart seti. Diskalkülide zayıf olan çekirdek sayı duyusu sistemini doğrudan hedefler. Zar, oyun kartı ve yapılandırılmış nokta dizilimleri kullanılabilir.</div>
+      <div class="arac-tags">
+        <span class="arac-tag">4–10 yaş</span>
+        <span class="arac-tag">Çekirdek sayı duyusu</span>
+        <span class="arac-tag">Anlık tanıma</span>
+      </div>
+      <div class="arac-ref">Clements (1999) · Teaching Children Mathematics</div>
+    </div>
+
+    <div style="height:24px"></div>
+  </div>
+</div>
+
+<!-- ═══════════ YAYINLAR ═══════════ -->
+<div class="screen" id="screen-yayinlar" role="region" aria-label="Yayınlar">
+  <div class="topbar">
+    <button class="back-btn" onclick="goBack()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <div class="topbar-center">Yayınlar & Kaynaklar</div>
+    <div style="width:32px"></div>
+  </div>
+  <div class="screen-body">
+
+    <!-- Hero -->
+    <div style="margin:14px 16px 0;background:linear-gradient(135deg,var(--brown-dark),var(--brown));border-radius:var(--r-lg);padding:20px">
+      <div style="font-family:var(--font-d);font-size:18px;font-weight:900;color:white;margin-bottom:6px">Prof. Dr. Yılmaz Mutlu</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.75);line-height:1.6">Diskalkuli alanında ulusal ve uluslararası yayınlar. ResearchGate, Academia.edu ve DOI linkleriyle erişim sağlanabilir.</div>
+      <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+        <a href="https://www.researchgate.net/profile/Yilmaz-Mutlu-2" target="_blank" style="display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.2);color:white;padding:6px 12px;border-radius:var(--r-full);font-size:11px;font-weight:700;text-decoration:none">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><circle cx="12" cy="12" r="10"/></svg> ResearchGate Profili
+        </a>
+        <a href="https://alparslan.academia.edu/YMutlu" target="_blank" style="display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.2);color:white;padding:6px 12px;border-radius:var(--r-full);font-size:11px;font-weight:700;text-decoration:none">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><rect x="3" y="3" width="18" height="18" rx="2"/></svg> Academia.edu
+        </a>
+      </div>
+    </div>
+
+    <!-- Filtreler -->
+    <div class="pub-filter-row">
+      <div class="pub-chip on" data-cat="tumu"   role="button" tabindex="0" aria-pressed="true">Tümü</div>
+      <div class="pub-chip"    data-cat="makale" role="button" tabindex="0" aria-pressed="false">Makale</div>
+      <div class="pub-chip"    data-cat="kitap"  role="button" tabindex="0" aria-pressed="false">Kitap</div>
+      <div class="pub-chip"    data-cat="rapor"  role="button" tabindex="0" aria-pressed="false">Rapor</div>
+    </div>
+
+    <!-- ── KİTAPLAR ── -->
+    <div class="pub-section-title">📚 Kitaplar & Editörlükler</div>
+
+    <div class="pub-card" data-pubcat="kitap">
+      <div class="pub-type-badge pub-badge-kitap">Kitap</div>
+      <div class="pub-title">Diskalkuli — Matematik Öğrenme Güçlüğüne Sahip Çocuklara Matematik Öğretimi</div>
+      <div class="pub-authors">Mutlu, Y., Olkun, S., Akgün, L. & Sarı, M. H. (Ed.)</div>
+      <div class="pub-journal">Vizetek Yayıncılık · Ankara · 2021</div>
+      <div class="pub-abstract">Diskalkülili çocuklara yönelik kapsamlı öğretim stratejileri, tanılama yöntemleri ve müdahale modelleri. Ulusal alanda alanın temel başvuru kitabı.</div>
+      <div class="pub-actions">
+        <a href="https://www.researchgate.net/publication/357302777_PROBLEMS_OF_DYSCALCULIC_CHILDREN_AND_PROPOSED_SOLUTIONS" target="_blank" class="pub-btn pub-btn-rg">ResearchGate</a>
+      </div>
+    </div>
+
+    <div class="pub-card" data-pubcat="kitap">
+      <div class="pub-type-badge pub-badge-kitap">Çeviri Editörlüğü</div>
+      <div class="pub-title">Diskalkuli Olan Öğrencilerin Tanılanması, Değerlendirilmesi ve Desteklenmesi</div>
+      <div class="pub-authors">Kelly, K. (Çeviri Ed.: Mutlu, Y. & Olkun, S.)</div>
+      <div class="pub-journal">Vizetek Yayıncılık · Ankara · 2021</div>
+      <div class="pub-abstract">İngilizce orjinalinden Türkçeye çevrilen alanın klasik eseri. Diskalkülinin tanılanması ve desteklenmesine yönelik uygulamalı rehber.</div>
+      <div class="pub-actions">
+        <a href="https://www.researchgate.net/publication/377299679_SOSYAL_ADALET_BAGLAMIN_DA_MATEMATIK_OGRENME_GUCLUGU" target="_blank" class="pub-btn pub-btn-rg">ResearchGate</a>
+      </div>
+    </div>
+
+    <div class="pub-card" data-pubcat="kitap">
+      <div class="pub-type-badge pub-badge-kitap">Kitap Bölümü</div>
+      <div class="pub-title">Sosyal Adalet Bağlamında Matematik Öğrenme Güçlüğü</div>
+      <div class="pub-authors">Mutlu, Y. (2023)</div>
+      <div class="pub-journal">Eğitimde Sosyal Adalet Çalışmaları · 2023</div>
+      <div class="pub-abstract">Diskalkülinin eğitimde sosyal adalet perspektifinden ele alınması; fırsat eşitliği ve kapsayıcı eğitim bağlamında politika önerileri.</div>
+      <div class="pub-actions">
+        <a href="https://www.researchgate.net/publication/377299679_SOSYAL_ADALET_BAGLAMIN_DA_MATEMATIK_OGRENME_GUCLUGU" target="_blank" class="pub-btn pub-btn-rg">ResearchGate</a>
+      </div>
+    </div>
+
+    <!-- ── ULUSLARARASI MAKALELER ── -->
+    <div class="pub-section-title">📄 Uluslararası Makaleler</div>
+
+    <div class="pub-card" data-pubcat="makale">
+      <div class="pub-type-badge pub-badge-makale">Makale · 2024</div>
+      <div class="pub-title">Bibliometric and Content Analyses of Dyscalculia Research</div>
+      <div class="pub-authors">Mutlu, Y. & Polat, K.</div>
+      <div class="pub-journal">Acta Didactica Napocensia, 17(1), 44–64 · DOI: 10.24193/adn.17.1.4</div>
+      <div class="pub-abstract">Web of Science veri tabanı kullanılarak diskalkuli araştırmalarının bibliyometrik ve içerik analizi. Alandaki temel temalar, araştırma eğilimleri ve etkin yazarlar belirlendi.</div>
+      <div class="pub-actions">
+        <a href="https://www.researchgate.net/publication/380361608_Bibliometric_and_Content_Analyses_of_Dyscalculia_Research" target="_blank" class="pub-btn pub-btn-rg">ResearchGate</a>
+        <a href="https://doi.org/10.24193/adn.17.1.4" target="_blank" class="pub-btn pub-btn-doi">DOI</a>
+      </div>
+    </div>
+
+    <div class="pub-card" data-pubcat="makale">
+      <div class="pub-type-badge pub-badge-makale">Makale · 2024</div>
+      <div class="pub-title">Effects of Dyscalculia on Personal, Social, Academic, Professional and Daily Life: A Case Study</div>
+      <div class="pub-authors">Mutlu, Y.</div>
+      <div class="pub-journal">Uluslararası Hakemli Dergi · 2024</div>
+      <div class="pub-abstract">Diskalkülinin bireyin kişisel, sosyal, akademik, mesleki ve günlük yaşamı üzerindeki etkilerini inceleyen vaka çalışması. Nitel araştırma yöntemiyle derinlemesine analiz.</div>
+      <div class="pub-actions">
+        <a href="https://www.researchgate.net/publication/387566612_Effects_of_Dyscalculia_on_Personal_Social_Academic_Professional_and_Daily_Life_A_Case_Study" target="_blank" class="pub-btn pub-btn-rg">ResearchGate</a>
+      </div>
+    </div>
+
+    <div class="pub-card" data-pubcat="makale">
+      <div class="pub-type-badge pub-badge-makale">Makale · 2022</div>
+      <div class="pub-title">We Asked Teachers: Do You Know What Dyscalculia Is?</div>
+      <div class="pub-authors">Mutlu, Y., Çalışkan, E. F. & Yasul, A. F.</div>
+      <div class="pub-journal">International Online Journal of Primary Education (IOJPE), 11(2), 361–378 · DOI: 10.55020/iojpe.1067560</div>
+      <div class="pub-abstract">400 öğretmenin diskalkuli bilgi düzeyini inceleyen betimsel araştırma. Sınıf, matematik, özel eğitim ve PDR öğretmenleri katıldı. Açık erişimli.</div>
+      <div class="pub-actions">
+        <a href="https://www.researchgate.net/publication/366396867_WE_ASKED_TEACHERS_DO_YOU_KNOW_WHAT_DYSCALCULIA_IS" target="_blank" class="pub-btn pub-btn-rg">ResearchGate</a>
+        <a href="https://doi.org/10.55020/iojpe.1067560" target="_blank" class="pub-btn pub-btn-doi">DOI</a>
+      </div>
+    </div>
+
+    <div class="pub-card" data-pubcat="makale">
+      <div class="pub-type-badge pub-badge-makale">Makale · 2019</div>
+      <div class="pub-title">Math Anxiety in Students with and without Math Learning Difficulties</div>
+      <div class="pub-authors">Mutlu, Y.</div>
+      <div class="pub-journal">International Electronic Journal of Elementary Education, 11(5), 471–475</div>
+      <div class="pub-abstract">Diskalkülili ve diskalkülisi olmayan öğrencilerde matematik kaygısının karşılaştırmalı incelemesi. Çalışma belleği ve performans ilişkisi analizi.</div>
+      <div class="pub-actions">
+        <a href="https://www.researchgate.net/profile/Yilmaz-Mutlu-2" target="_blank" class="pub-btn pub-btn-rg">ResearchGate</a>
+      </div>
+    </div>
+
+    <div class="pub-card" data-pubcat="makale">
+      <div class="pub-type-badge pub-badge-makale">Makale · 2019</div>
+      <div class="pub-title">Finger Counting Tendencies of Students with Dyscalculia: A Perspective of Cognitive Neuroscience and Psychology</div>
+      <div class="pub-authors">Mutlu, Y.</div>
+      <div class="pub-journal">Bilişsel Sinirbilim Perspektifinden Parmakla Sayma · 2019</div>
+      <div class="pub-abstract">Diskalkülili öğrencilerde parmakla sayma eğilimlerini bilişsel sinirbilim ve psikoloji perspektifinden açıklayan teorik çalışma. Bedenlenmiş biliş yaklaşımı.</div>
+      <div class="pub-actions">
+        <a href="https://www.researchgate.net/publication/335233513_Finger_Counting_Tendencies_of_Students_with_Dyscalculia_A_Perspective_of_Cognitive_Neuroscience_and_Psychology" target="_blank" class="pub-btn pub-btn-rg">ResearchGate PDF</a>
+      </div>
+    </div>
+
+    <div class="pub-card" data-pubcat="makale">
+      <div class="pub-type-badge pub-badge-makale">Makale · 2017</div>
+      <div class="pub-title">Matematik Öğrenme Güçlüğünü Tanılamada Yeni Bir Model Önerisi: Çoklu Süzgeç Modeli</div>
+      <div class="pub-authors">Mutlu, Y. & Akgün, L.</div>
+      <div class="pub-journal">İlköğretim Online, 16(3), 1153–1173</div>
+      <div class="pub-abstract">Matematik öğrenme güçlüğünün tanılanmasında mevcut yöntemlerin sınırlılıklarını aşmak için geliştirilen özgün Çoklu Süzgeç Modeli'nin kuramsal çerçevesi ve uygulaması.</div>
+      <div class="pub-actions">
+        <a href="https://www.researchgate.net/publication/318703496_Matematik_Ogrenme_Guclugunu_Tanilamada_Yeni_Bir_Model_Onerisi_Coklu_Suzgec_Modeli" target="_blank" class="pub-btn pub-btn-rg">ResearchGate</a>
+      </div>
+    </div>
+
+    <div class="pub-card" data-pubcat="makale">
+      <div class="pub-type-badge pub-badge-makale">Kitap Bölümü · 2016</div>
+      <div class="pub-title">Matematik Öğrenme Güçlüğü ve Eğitsel Nörobilim</div>
+      <div class="pub-authors">Mutlu, Y. & Akgün, L.</div>
+      <div class="pub-journal">Eğitsel Sinirbilim Çalışmaları · 2016</div>
+      <div class="pub-abstract">Matematik öğrenme güçlüğünün eğitsel nörobilim perspektifinden incelenmesi. Sayısal işlemin nörobilimsel temelleri ve müdahale stratejileri.</div>
+      <div class="pub-actions">
+        <a href="https://www.researchgate.net/publication/309612884_Matematik_ogrenme_guclugu_ve_egitsel_norobilim" target="_blank" class="pub-btn pub-btn-rg">ResearchGate</a>
+      </div>
+    </div>
+
+    <!-- ── RAPOR ── -->
+    <div class="pub-section-title">📋 Raporlar & Diğer</div>
+
+    <div class="pub-card" data-pubcat="rapor">
+      <div class="pub-type-badge pub-badge-rapor">AB Raporu · 2021</div>
+      <div class="pub-title">Problems of Dyscalculic Children and Proposed Solutions</div>
+      <div class="pub-authors">Mutlu, Y., Çam, Z. & Çalışkan, E. F.</div>
+      <div class="pub-journal">Diskalkuli Derneği · AB Etkiniz Programı · 2021</div>
+      <div class="pub-abstract">Avrupa Birliği Etkiniz Programı desteğiyle hazırlanan kapsamlı araştırma raporu. Diskalkülili çocukların yaşadığı sorunlar ve eğitimde çözüm önerileri. İngilizce.</div>
+      <div class="pub-actions">
+        <a href="https://www.researchgate.net/publication/357302777_PROBLEMS_OF_DYSCALCULIC_CHILDREN_AND_PROPOSED_SOLUTIONS" target="_blank" class="pub-btn pub-btn-rg">ResearchGate PDF</a>
+        <a href="https://diskalkulidernegi.org" target="_blank" class="pub-btn pub-btn-web">Dernek Sitesi</a>
+      </div>
+    </div>
+
+    <div class="pub-card" data-pubcat="makale">
+      <div class="pub-type-badge pub-badge-makale">Araştırma · 2022</div>
+      <div class="pub-title">DokunSay Sayı Tabletlerinin Okul Öncesi Çocuklarının Aritmetik Becerileri Üzerindeki Etkisi</div>
+      <div class="pub-authors">Mutlu, Y., Olkun, S. & Cumhur, M.</div>
+      <div class="pub-journal">DokunSay Araştırması · 2019/2022</div>
+      <div class="pub-abstract">Patentli DokunSay dokunmatik sayı tableti materyalinin okul öncesi çocuklarının aritmetik becerileri üzerindeki etkisini inceleyen deneysel araştırma.</div>
+      <div class="pub-actions">
+        <a href="https://www.researchgate.net/publication/330934022_Dokunsay_Sayi_Tabletlerinin_Okul_Oncesi_Cocuklarinin_Aritmetik_Becerileri_Uzerindeki_Etkisinin_Incelenmesi" target="_blank" class="pub-btn pub-btn-rg">ResearchGate</a>
+      </div>
+    </div>
+
+    <div style="height:10px"></div>
+    <div style="margin:0 16px 20px;padding:14px;background:var(--green-light);border-radius:var(--r-md);border-left:3px solid var(--green)">
+      <div style="font-family:var(--font-d);font-size:12px;font-weight:800;color:var(--green-dark);margin-bottom:4px">Tüm Yayınlar</div>
+      <div style="font-size:12px;color:var(--green-dark);line-height:1.6">Tüm yayınlara ResearchGate ve Academia.edu profillerinden erişilebilir. H-indeks: 14 · Atıf: ~500+</div>
+      <a href="https://www.researchgate.net/profile/Yilmaz-Mutlu-2" target="_blank" style="display:inline-block;margin-top:8px;font-size:11px;font-weight:700;color:var(--green-dark);text-decoration:underline">researchgate.net/profile/Yilmaz-Mutlu-2 →</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════ KONGRE ═══════════ -->
+<div class="screen" id="screen-kongre" role="region" aria-label="Kongre">
+  <div class="topbar" style="background:linear-gradient(90deg,var(--green-dark),var(--green))">
+    <button class="back-btn" onclick="goBack()"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <div class="topbar-center" style="color:white">IV. ICMLD 2026</div>
+    <div style="width:32px"></div>
+  </div>
+  <div class="screen-body">
+
+    <!-- Hero -->
+    <div class="kng-hero">
+      <div class="kng-hero-bg"></div>
+      <div class="kng-roman">IV</div>
+      <div class="kng-subtitle">International Congress on</div>
+      <div class="kng-title">Mathematics Learning Difficulties</div>
+      <div class="kng-tagline">Aile Odaklı Yaklaşımlar · Family-Centered Approaches</div>
+      <div class="kng-meta-row">
+        <div class="kng-meta-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="14" height="14"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          1–3 Ekim 2026
+        </div>
+        <div class="kng-meta-dot">·</div>
+        <div class="kng-meta-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="14" height="14"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          İstanbul Medeniyet Üni.
+        </div>
+      </div>
+      <div class="kng-alert">📣 Bildiri Çağrısı Açık · Son Gün: 6 Eylül 2026</div>
+    </div>
+
+    <!-- Geri sayım -->
+    <div class="kng-countdown">
+      <div class="kng-cd-box"><div class="kng-cd-n" id="cd-g">--</div><div class="kng-cd-l">Gün</div></div>
+      <div class="kng-cd-sep">:</div>
+      <div class="kng-cd-box"><div class="kng-cd-n" id="cd-s">--</div><div class="kng-cd-l">Saat</div></div>
+      <div class="kng-cd-sep">:</div>
+      <div class="kng-cd-box"><div class="kng-cd-n" id="cd-d">--</div><div class="kng-cd-l">Dakika</div></div>
+      <div class="kng-cd-sep">:</div>
+      <div class="kng-cd-box"><div class="kng-cd-n" id="cd-sn">--</div><div class="kng-cd-l">Saniye</div></div>
+    </div>
+
+    <!-- Sekmeler -->
+    <div class="kng-tabs">
+      <div class="kng-tab active" data-panel="genel"   role="tab" tabindex="0" aria-selected="true">Genel</div>
+      <div class="kng-tab"         data-panel="bildiri" role="tab" tabindex="0" aria-selected="false">Bildiri</div>
+      <div class="kng-tab"         data-panel="kayit"   role="tab" tabindex="0" aria-selected="false">Kayıt</div>
+      <div class="kng-tab"         data-panel="program" role="tab" tabindex="0" aria-selected="false">Program</div>
+    </div>
+
+    <!-- GENEL -->
+    <div class="kng-panel active" id="kng-genel">
+
+      <!-- Ana Tema -->
+      <div style="margin:14px 16px 0;background:var(--green-light);border-radius:var(--r-lg);padding:16px;border-left:4px solid var(--green)">
+        <div style="font-family:var(--font-d);font-size:13px;font-weight:900;color:var(--green-dark);margin-bottom:6px">🎯 Ana Tema</div>
+        <div style="font-size:13px;color:var(--green-dark);line-height:1.6;font-weight:600">Aile Odaklı Yaklaşımlar / Family-Centered Approaches in Mathematics Learning Difficulties</div>
+        <div style="font-size:11px;color:var(--green-mid);margin-top:6px;line-height:1.5">Diskalkülili bireylerin aile desteği, ebeveyn katılımı ve ev-okul iş birliği perspektiflerinden ele alınması</div>
+      </div>
+
+      <!-- Önemli Tarihler -->
+      <div style="padding:14px 16px 0;font-family:var(--font-d);font-size:13px;font-weight:900;color:var(--green-dark);margin-bottom:10px">📅 Önemli Tarihler</div>
+      <div style="margin:0 16px;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);overflow:hidden">
+        <div class="kng-date-row">
+          <div class="kng-date-badge" style="background:#E3F2FD;color:#1565C0">6 Eyl</div>
+          <div class="kng-date-body"><div class="kng-date-title">Bildiri Son Gönderme</div><div class="kng-date-sub">Tam metin bildiri başvuruları</div></div>
+          <div class="kng-date-left" id="kng-days-bildiri"></div>
+        </div>
+        <div class="kng-date-row">
+          <div class="kng-date-badge" style="background:#FFF3E0;color:#E65100">15 Eyl</div>
+          <div class="kng-date-body"><div class="kng-date-title">Kabul Bildirim</div><div class="kng-date-sub">Hakem değerlendirme sonuçları</div></div>
+        </div>
+        <div class="kng-date-row">
+          <div class="kng-date-badge" style="background:#F3E5F5;color:#7B1FA2">20 Eyl</div>
+          <div class="kng-date-body"><div class="kng-date-title">Erken Kayıt Son</div><div class="kng-date-sub">İndirimli kayıt tarihi</div></div>
+        </div>
+        <div class="kng-date-row" style="border-bottom:none">
+          <div class="kng-date-badge" style="background:var(--green-light);color:var(--green-dark)">1 Eki</div>
+          <div class="kng-date-body"><div class="kng-date-title">Kongre Açılışı</div><div class="kng-date-sub">İstanbul Medeniyet Üniversitesi</div></div>
+        </div>
+      </div>
+
+      <!-- Düzenleyenler -->
+      <div style="padding:14px 16px 0;font-family:var(--font-d);font-size:13px;font-weight:900;color:var(--green-dark);margin-bottom:10px">🏛 Düzenleyenler</div>
+      <div style="margin:0 16px 14px;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:14px">
+        <div style="display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--gray-100)">
+          <div style="width:36px;height:36px;background:var(--green-light);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🏢</div>
+          <div><div style="font-family:var(--font-d);font-size:13px;font-weight:800;color:var(--green-dark)">Diskalkuli Derneği</div><div style="font-size:11px;color:var(--gray-400)">Ana Organizatör</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;padding:8px 0">
+          <div style="width:36px;height:36px;background:var(--brown-light);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🎓</div>
+          <div><div style="font-family:var(--font-d);font-size:13px;font-weight:800;color:var(--green-dark)">İstanbul Medeniyet Üniversitesi</div><div style="font-size:11px;color:var(--gray-400)">Ev Sahibi Kurum</div></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BİLDİRİ -->
+    <div class="kng-panel" id="kng-bildiri">
+      <div style="padding:14px 16px 0">
+
+        <div style="background:linear-gradient(135deg,var(--green-dark),var(--green));border-radius:var(--r-lg);padding:16px;margin-bottom:14px">
+          <div style="font-family:var(--font-d);font-size:15px;font-weight:900;color:white;margin-bottom:6px">Bildiri Gönder</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.75);line-height:1.5">Bildiriler çift kör hakem denetiminden geçer. Kabul edilen bildiriler kongre kitabında yayımlanır.</div>
+        </div>
+
+        <!-- Konu Başlıkları -->
+        <div style="font-family:var(--font-d);font-size:12px;font-weight:800;color:var(--brown-mid);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px">Konu Başlıkları</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px">
+          <span class="kng-topic">Diskalkuli Tanılama</span>
+          <span class="kng-topic">Aile Katılımı</span>
+          <span class="kng-topic">Erken Müdahale</span>
+          <span class="kng-topic">Sayı Duyusu</span>
+          <span class="kng-topic">Matematik Kaygısı</span>
+          <span class="kng-topic">Dijital Araçlar</span>
+          <span class="kng-topic">Nörogelişim</span>
+          <span class="kng-topic">Kapsayıcı Eğitim</span>
+          <span class="kng-topic">Vaka Çalışmaları</span>
+          <span class="kng-topic">Politika Önerileri</span>
+        </div>
+
+        <!-- Bildiri Formu -->
+        <div style="font-family:var(--font-d);font-size:12px;font-weight:800;color:var(--brown-mid);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px">Başvuru Formu</div>
+        <div class="cm-form-card">
+          <div style="margin-bottom:12px"><div class="cm-label">Bildiri Başlığı *</div><input id="bld-baslik" type="text" placeholder="Bildiri başlığını girin..." class="cm-input"></div>
+          <div style="margin-bottom:12px"><div class="cm-label">Yazar(lar) *</div><input id="bld-yazar" type="text" placeholder="Ad Soyad, Kurum; Ad Soyad, Kurum..." class="cm-input"></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+            <div><div class="cm-label">Bildiri Türü</div>
+              <select id="bld-tur" class="cm-input cm-select">
+                <option>Sözlü Bildiri</option>
+                <option>Poster Bildiri</option>
+                <option>Çalıştay</option>
+                <option>Panel</option>
+              </select>
+            </div>
+            <div><div class="cm-label">Dil</div>
+              <select id="bld-dil" class="cm-input cm-select">
+                <option>Türkçe</option>
+                <option>İngilizce</option>
+              </select>
+            </div>
+          </div>
+          <div style="margin-bottom:12px"><div class="cm-label">Özet (250–300 kelime) *</div><textarea id="bld-ozet" placeholder="Araştırmanızın amacı, yöntemi, bulgular ve sonuçları..." rows="5" class="cm-input cm-textarea"></textarea></div>
+          <div style="margin-bottom:14px"><div class="cm-label">Anahtar Kelimeler *</div><input id="bld-kelime" type="text" placeholder="Virgülle ayırın: diskalkuli, aile, müdahale..." class="cm-input"></div>
+          <div id="bld-error" style="display:none;background:#FFEBEE;border-radius:var(--r-sm);padding:10px 14px;font-size:13px;color:var(--danger);margin-bottom:12px"></div>
+          <button class="cm-publish-btn" style="width:100%;padding:14px" onclick="submitBildiri()">📨 Bildiri Gönder</button>
+        </div>
+
+        <div style="background:var(--brown-light);border-radius:var(--r-md);padding:12px;border-left:3px solid var(--brown)">
+          <div style="font-family:var(--font-d);font-size:11px;font-weight:800;color:var(--brown-dark);margin-bottom:4px">📎 Yönergeler</div>
+          <div style="font-size:11px;color:var(--brown-dark);line-height:1.7">APA 7 atıf stili · Times New Roman 12pt · 1.5 satır aralığı · Sözlü: 10+5 dk · Poster: A1 dikey</div>
+        </div>
+        <div style="height:24px"></div>
+      </div>
+    </div>
+
+    <!-- KAYIT -->
+    <div class="kng-panel" id="kng-kayit">
+      <div style="padding:14px 16px 0">
+
+        <!-- Ücret tablosu -->
+        <div style="font-family:var(--font-d);font-size:12px;font-weight:800;color:var(--brown-mid);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px">Kayıt Ücretleri</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px">
+          <div class="kng-fee-card kng-fee-featured">
+            <div class="kng-fee-label">Erken Kayıt · Yurt İçi</div>
+            <div class="kng-fee-badge">20 Eylül'e kadar</div>
+            <div class="kng-fee-price">1.200 ₺</div>
+            <div class="kng-fee-note">Üye indirimi: 1.000 ₺</div>
+          </div>
+          <div class="kng-fee-card">
+            <div class="kng-fee-label">Normal Kayıt · Yurt İçi</div>
+            <div class="kng-fee-price">1.500 ₺</div>
+            <div class="kng-fee-note">Üye indirimi: 1.200 ₺</div>
+          </div>
+          <div class="kng-fee-card">
+            <div class="kng-fee-label">Uluslararası Katılımcı</div>
+            <div class="kng-fee-price">200 USD</div>
+            <div class="kng-fee-note">Erken: 150 USD</div>
+          </div>
+          <div class="kng-fee-card">
+            <div class="kng-fee-label">Öğrenci (Lisansüstü)</div>
+            <div class="kng-fee-price">600 ₺</div>
+            <div class="kng-fee-note">Öğrenci belgesi ile</div>
+          </div>
+        </div>
+
+        <!-- Kayıt Formu -->
+        <div style="font-family:var(--font-d);font-size:12px;font-weight:800;color:var(--brown-mid);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px">Online Kayıt</div>
+        <div class="cm-form-card">
+          <div style="margin-bottom:12px"><div class="cm-label">Ad Soyad *</div><input id="kyt-ad" type="text" placeholder="Ad ve soyadınız" class="cm-input"></div>
+          <div style="margin-bottom:12px"><div class="cm-label">E-posta *</div><input id="kyt-email" type="email" placeholder="E-posta adresiniz" class="cm-input"></div>
+          <div style="margin-bottom:12px"><div class="cm-label">Kurum</div><input id="kyt-kurum" type="text" placeholder="Üniversite / Kurum adı" class="cm-input"></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+            <div><div class="cm-label">Katılım Türü</div>
+              <select id="kyt-tur" class="cm-input cm-select">
+                <option>Yurt İçi</option>
+                <option>Uluslararası</option>
+                <option>Öğrenci</option>
+              </select>
+            </div>
+            <div><div class="cm-label">Kayıt Dönemi</div>
+              <select id="kyt-donem" class="cm-input cm-select">
+                <option>Erken Kayıt</option>
+                <option>Normal Kayıt</option>
+              </select>
+            </div>
+          </div>
+          <div style="margin-bottom:14px">
+            <div class="cm-label">Ek Seçenekler</div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <label style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--gray-700);cursor:pointer"><input type="checkbox" style="accent-color:var(--green);width:15px;height:15px"> Gala yemeği (+200 ₺)</label>
+              <label style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--gray-700);cursor:pointer"><input type="checkbox" style="accent-color:var(--green);width:15px;height:15px"> Çalıştay katılımı (Ücretsiz)</label>
+              <label style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--gray-700);cursor:pointer"><input type="checkbox" style="accent-color:var(--green);width:15px;height:15px"> Kongre kiti</label>
+            </div>
+          </div>
+          <div id="kyt-error" style="display:none;background:#FFEBEE;border-radius:var(--r-sm);padding:10px 14px;font-size:13px;color:var(--danger);margin-bottom:12px"></div>
+          <button class="cm-publish-btn" style="width:100%;padding:14px" onclick="submitKayit()">✓ Kayıt Talebi Gönder</button>
+        </div>
+
+        <div style="background:var(--green-light);border-radius:var(--r-md);padding:12px;border-left:3px solid var(--green);margin-bottom:16px">
+          <div style="font-size:11px;color:var(--green-dark);line-height:1.7">Ödeme, kayıt onayının ardından banka havalesi ile yapılabilir. IBAN: TR12 0001 0000 0000 0000 0000 00 · Diskalkuli Derneği</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROGRAM -->
+    <div class="kng-panel" id="kng-program">
+      <div style="padding:14px 16px 0">
+
+        <div style="display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;scrollbar-width:none">
+          <div class="kng-day-btn on" data-day="1" role="tab" tabindex="0" aria-selected="true">1 Eki</div>
+          <div class="kng-day-btn"    data-day="2" role="tab" tabindex="0" aria-selected="false">2 Eki</div>
+          <div class="kng-day-btn"    data-day="3" role="tab" tabindex="0" aria-selected="false">3 Eki</div>
+        </div>
+
+        <!-- Gün 1 -->
+        <div class="kng-day-panel active" id="kng-day-1">
+          <div class="kng-prog-item kng-prog-special">
+            <div class="kng-prog-time">09:00</div>
+            <div class="kng-prog-body"><div class="kng-prog-title">Açılış Töreni & Davetli Konuşmacılar</div><div class="kng-prog-meta">Ana Salon · Prof. Dr. Yılmaz Mutlu</div></div>
+          </div>
+          <div class="kng-prog-item">
+            <div class="kng-prog-time">10:30</div>
+            <div class="kng-prog-body"><div class="kng-prog-title">Keynote: Diskalkuli ve Aile Dinamikleri</div><div class="kng-prog-meta">Ana Salon · Davetli Konuşmacı</div></div>
+          </div>
+          <div class="kng-prog-item kng-prog-break">
+            <div class="kng-prog-time">11:30</div>
+            <div class="kng-prog-body"><div class="kng-prog-title">☕ Kahve Arası & Poster Sergisi</div><div class="kng-prog-meta">Fuaye</div></div>
+          </div>
+          <div class="kng-prog-item">
+            <div class="kng-prog-time">12:00</div>
+            <div class="kng-prog-body"><div class="kng-prog-title">Paralel Oturumlar — Tanılama & Değerlendirme</div><div class="kng-prog-meta">Salon A, B, C</div></div>
+          </div>
+          <div class="kng-prog-item kng-prog-break">
+            <div class="kng-prog-time">13:30</div>
+            <div class="kng-prog-body"><div class="kng-prog-title">🍽 Öğle Yemeği</div><div class="kng-prog-meta">Kafeterya</div></div>
+          </div>
+          <div class="kng-prog-item">
+            <div class="kng-prog-time">14:30</div>
+            <div class="kng-prog-body"><div class="kng-prog-title">Çalıştay: DokunSay Uygulamaları</div><div class="kng-prog-meta">Atölye Salonu · Sınırlı kontenjan</div></div>
+          </div>
+          <div class="kng-prog-item">
+            <div class="kng-prog-time">16:30</div>
+            <div class="kng-prog-body"><div class="kng-prog-title">Paralel Oturumlar — Erken Müdahale</div><div class="kng-prog-meta">Salon A, B</div></div>
+          </div>
+          <div class="kng-prog-item kng-prog-special">
+            <div class="kng-prog-time">19:00</div>
+            <div class="kng-prog-body"><div class="kng-prog-title">🎉 Gala Yemeği</div><div class="kng-prog-meta">Kongre Merkezi Restoranı</div></div>
+          </div>
+        </div>
+
+        <!-- Gün 2 -->
+        <div class="kng-day-panel" id="kng-day-2">
+          <div class="kng-prog-item kng-prog-special">
+            <div class="kng-prog-time">09:00</div>
+            <div class="kng-prog-body"><div class="kng-prog-title">Keynote: Aile Temelli Müdahale Modelleri</div><div class="kng-prog-meta">Ana Salon · Davetli Konuşmacı</div></div>
+          </div>
+          <div class="kng-prog-item">
+            <div class="kng-prog-time">10:30</div>
+            <div class="kng-prog-body"><div class="kng-prog-title">Paralel Oturumlar — Dijital Araçlar & Teknoloji</div><div class="kng-prog-meta">Salon A, B, C</div></div>
+          </div>
+          <div class="kng-prog-item kng-prog-break">
+            <div class="kng-prog-time">12:00</div>
+            <div class="kng-prog-body"><div class="kng-prog-title">☕ Kahve Arası</div><div class="kng-prog-meta">Fuaye</div></div>
+          </div>
+          <div class="kng-prog-item">
+            <div class="kng-prog-time">12:30</div>
+            <div class="kng-prog-body"><div class="kng-prog-title">Panel: Türkiye'de Diskalkuli Politikaları</div><div class="kng-prog-meta">Ana Salon · Prof. Dr. Yılmaz Mutlu (Moderatör)</div></div>
+          </div>
+          <div class="kng-prog-item kng-prog-break">
+            <div class="kng-prog-time">14:00</div>
+            <div class="kng-prog-body"><div class="kng-prog-title">🍽 Öğle Yemeği</div><div class="kng-prog-meta">Kafeterya</div></div>
+          </div>
+          <div class="kng-prog-item">
+            <div class="kng-prog-time">15:00</div>
+            <div class="kng-prog-body"><div class="kng-prog-title">Çalıştay: Ebeveynlerle Matematik</div><div class="kng-prog-meta">Atölye Salonu</div></div>
+          </div>
+          <div class="kng-prog-item">
+            <div class="kng-prog-time">17:00</div>
+            <div class="kng-prog-body"><div class="kng-prog-title">Paralel Oturumlar — Vaka Çalışmaları</div><div class="kng-prog-meta">Salon A, B</div></div>
+          </div>
+        </div>
+
+        <!-- Gün 3 -->
+        <div class="kng-day-panel" id="kng-day-3">
+          <div class="kng-prog-item kng-prog-special">
+            <div class="kng-prog-time">09:00</div>
+            <div class="kng-prog-body"><div class="kng-prog-title">Keynote: Nöropedagoji ve Matematik Öğrenimi</div><div class="kng-prog-meta">Ana Salon</div></div>
+          </div>
+          <div class="kng-prog-item">
+            <div class="kng-prog-time">10:30</div>
+            <div class="kng-prog-body"><div class="kng-prog-title">Paralel Oturumlar — Uluslararası Perspektifler</div><div class="kng-prog-meta">Salon A, B, C</div></div>
+          </div>
+          <div class="kng-prog-item kng-prog-break">
+            <div class="kng-prog-time">12:00</div>
+            <div class="kng-prog-body"><div class="kng-prog-title">☕ Kahve Arası & Sertifika Dağıtımı</div><div class="kng-prog-meta">Fuaye</div></div>
+          </div>
+          <div class="kng-prog-item">
+            <div class="kng-prog-time">12:30</div>
+            <div class="kng-prog-body"><div class="kng-prog-title">V. ICMLD Duyurusu & Kapanış Paneli</div><div class="kng-prog-meta">Ana Salon</div></div>
+          </div>
+          <div class="kng-prog-item kng-prog-special">
+            <div class="kng-prog-time">14:00</div>
+            <div class="kng-prog-body"><div class="kng-prog-title">🎓 Kapanış Töreni</div><div class="kng-prog-meta">Ana Salon · Prof. Dr. Yılmaz Mutlu</div></div>
+          </div>
+        </div>
+
+        <div style="height:24px"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- ═══════════ UYE ═══════════ -->
+<div class="screen" id="screen-uye" role="region" aria-label="Üyelik Kademeleri">
+  <div class="topbar">
+    <button class="back-btn" onclick="goBack()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <div class="topbar-center">Üyelik & Hiyerarşi</div>
+    <div style="width:32px"></div>
+  </div>
+  <div class="screen-body">
+    <div style="padding:14px 16px 0">
+      <div style="font-family:var(--font-d);font-size:14px;font-weight:800;color:var(--green-dark);margin-bottom:3px">Üyelik Kademeleri</div>
+      <div style="font-size:12px;color:var(--gray-400)">Her kademenin erişim yetkileri ve sorumlulukları</div>
+    </div>
+    <div style="height:12px"></div>
+    <div id="tier-list"></div>
+  </div>
+</div>
+
+<!-- ═══════════ İLERLEME TAKİP ═══════════ -->
+<div class="screen" id="screen-ilerleme" role="region" aria-label="İlerleme">
+  <div class="topbar">
+    <button class="back-btn" onclick="goBack()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <div class="topbar-center">İlerleme Takibi</div>
+    <div style="width:32px"></div>
+  </div>
+  <div class="screen-body">
+    <div class="hero">
+      <div class="hero-text">
+        <div class="hero-greet">Toplam İlerleme</div>
+        <div class="hero-name" style="font-size:32px">%42</div>
+        <div class="hero-badge">3 / 7 Eğitim Tamamlandı</div>
+      </div>
+    </div>
+    <div style="height:16px"></div>
+    <div class="section-head"><div class="section-title">Eğitim Durumları</div></div>
+    <div id="progress-list"></div>
+  </div>
+</div>
+
+<!-- ═══════════ TOPLULUK ═══════════ -->
+<div class="screen" id="screen-topluluk" role="region" aria-label="Topluluk">
+  <div class="topbar">
+    <button class="back-btn" onclick="goBack()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <div class="topbar-center">Topluluk & Forum</div>
+    <button class="icon-btn" onclick="openModal('post-modal')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    </button>
+  </div>
+  <div class="screen-body">
+    <div class="chips-row" id="community-chips"></div>
+    <div style="height:10px"></div>
+    <div id="community-list"></div>
+
+    <div style="height:16px"></div>
+  </div>
+</div>
+<!-- ═══════════ PROFIL ═══════════ -->
+<div class="screen" id="screen-profil" role="region" aria-label="Profil">
+  <div class="topbar">
+    <div class="topbar-center">Profilim</div>
+    <button class="icon-btn" onclick="goTo('yonetim')" id="admin-shortcut" style="display:none">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+    </button>
+  </div>
+  <div class="screen-body">
+
+    <!-- Avatar + Temel Bilgi -->
+    <div class="pf-head">
+      <div class="pf-av-wrap">
+        <div class="pf-av" id="pf-av">YM</div>
+        <div class="pf-av-edit">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+      </div>
+      <div class="pf-name" id="pf-name">Prof. Dr. Yılmaz Mutlu</div>
+      <div class="pf-email" id="pf-email">y.mutlu@alparslan.edu.tr</div>
+      <div class="pf-badge" id="pf-badge-role">YK Başkanı</div>
+    </div>
+
+    <!-- İstatistikler -->
+    <div class="pf-stats">
+      <div class="pf-stat-item">
+        <div class="pf-stat-n" id="pf-stat-yil">7</div>
+        <div class="pf-stat-l">Yıl Üyelik</div>
+      </div>
+      <div class="pf-stat-sep"></div>
+      <div class="pf-stat-item">
+        <div class="pf-stat-n" id="pf-stat-sert">3</div>
+        <div class="pf-stat-l">Sertifika</div>
+      </div>
+      <div class="pf-stat-sep"></div>
+      <div class="pf-stat-item">
+        <div class="pf-stat-n" id="pf-stat-yetki">12</div>
+        <div class="pf-stat-l">Yetki</div>
+      </div>
+    </div>
+
+    <!-- Sertifikalar -->
+    <div class="pf-section-title">🎓 Sertifikalarım</div>
+    <div style="padding:0 16px;display:flex;flex-direction:column;gap:8px">
+      <div class="pf-cert-card">
+        <div class="pf-cert-icon">✓</div>
+        <div style="flex:1"><div class="pf-cert-name">Diskalkuli Farkındalık Eğitimi</div><div class="pf-cert-date">Mart 2026 · Diskalkuli Derneği</div></div>
+        <button class="pf-cert-btn">İndir</button>
+      </div>
+      <div class="pf-cert-card">
+        <div class="pf-cert-icon">✓</div>
+        <div style="flex:1"><div class="pf-cert-name">Matematik Kaygısı: Etkileri ve Müdahale</div><div class="pf-cert-date">Ocak 2026 · Diskalkuli Derneği</div></div>
+        <button class="pf-cert-btn">İndir</button>
+      </div>
+      <div class="pf-cert-card">
+        <div class="pf-cert-icon">✓</div>
+        <div style="flex:1"><div class="pf-cert-name">DokunSay ile Erken Müdahale</div><div class="pf-cert-date">Kasım 2025 · Diskalkuli Derneği</div></div>
+        <button class="pf-cert-btn">İndir</button>
+      </div>
+    </div>
+
+    <!-- Hesap Bilgileri -->
+    <div class="pf-section-title">👤 Hesap Bilgileri</div>
+    <div class="pf-card">
+      <div class="pf-row" onclick="editPfField('ad-soyad')">
+        <svg class="pf-row-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <div class="pf-row-body"><div class="pf-row-label">Ad Soyad</div><div class="pf-row-val" id="pf-fullname">Prof. Dr. Yılmaz Mutlu</div></div>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gray-300)" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+      <div class="pf-row" onclick="editPfField('email')">
+        <svg class="pf-row-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+        <div class="pf-row-body"><div class="pf-row-label">E-posta</div><div class="pf-row-val" id="pf-mail">y.mutlu@alparslan.edu.tr</div></div>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gray-300)" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+      <div class="pf-row">
+        <svg class="pf-row-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <div class="pf-row-body"><div class="pf-row-label">İl</div><div class="pf-row-val" id="pf-city">Muş</div></div>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gray-300)" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+      <div class="pf-row" style="border-bottom:none">
+        <svg class="pf-row-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <div class="pf-row-body"><div class="pf-row-label">Şifre</div><div class="pf-row-val">••••••••••••</div></div>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gray-300)" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+    </div>
+
+    <!-- Bildirim Ayarları -->
+    <div class="pf-section-title">🔔 Bildirimler</div>
+    <div class="pf-card">
+      <div class="pf-row" style="border-bottom:1px solid var(--gray-100)">
+        <svg class="pf-row-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <div class="pf-row-body"><div class="pf-row-label">Duyurular</div><div class="pf-row-val" style="font-size:11px">Yeni duyurular için</div></div>
+        <label class="pf-toggle"><input type="checkbox" checked><span class="pf-toggle-slider"></span></label>
+      </div>
+      <div class="pf-row" style="border-bottom:1px solid var(--gray-100)">
+        <svg class="pf-row-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        <div class="pf-row-body"><div class="pf-row-label">Yeni Eğitimler</div><div class="pf-row-val" style="font-size:11px">Kurs ve etkinlikler</div></div>
+        <label class="pf-toggle"><input type="checkbox" checked><span class="pf-toggle-slider"></span></label>
+      </div>
+      <div class="pf-row" style="border-bottom:none">
+        <svg class="pf-row-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <div class="pf-row-body"><div class="pf-row-label">Kongre</div><div class="pf-row-val" style="font-size:11px">ICMLD haberleri</div></div>
+        <label class="pf-toggle"><input type="checkbox"><span class="pf-toggle-slider"></span></label>
+      </div>
+    </div>
+
+    <!-- Çıkış -->
+    <div style="padding:16px 16px 0">
+      <button class="pf-logout-btn" onclick="logout()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Çıkış Yap
+      </button>
+      <div style="text-align:center;margin-top:12px;font-size:11px;color:var(--gray-300)">Diskalkuli Derneği · v2.2 · 2026</div>
+    </div>
+    <div style="height:24px"></div>
+  </div>
+</div>
+<!-- ═══════════ YONETIM ═══════════ -->
+<div class="screen" id="screen-yonetim" role="region" aria-label="Yönetim Paneli">
+  <div class="admin-topbar">
+    <button class="back-btn" onclick="goBack()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <div style="flex:1">
+      <div style="font-family:var(--font-d);font-size:14px;font-weight:900;color:white">Yönetim Paneli</div>
+      <div id="admin-role-label" class="admin-role-badge">Yönetim Kurulu</div>
+    </div>
+    <div style="width:32px"></div>
+  </div>
+  <div class="admin-panel-tabs">
+    <div class="ap-tab active" onclick="adminTab('ozet',this)">Özet</div>
+    <div class="ap-tab" onclick="adminTab('uyeler',this)">Üyeler</div>
+    <div class="ap-tab" onclick="adminTab('basvurular',this)">Başvurular</div>
+    <div class="ap-tab" onclick="adminTab('finans',this)">Finans</div>
+    <div class="ap-tab" onclick="adminTab('etkinlikler',this)">Etkinlikler</div>
+    <div class="ap-tab" onclick="adminTab('yk',this)">YK</div>
+  </div>
+  <div class="screen-body">
+    <!-- ÖZET -->
+    <div class="ap-panel active" id="ap-ozet">
+      <div class="admin-stats-row">
+        <div class="admin-stat-c"><div class="admin-stat-n">4.2K</div><div class="admin-stat-l">Üye</div></div>
+        <div class="admin-stat-c"><div class="admin-stat-n">47</div><div class="admin-stat-l">Temsilci</div></div>
+        <div class="admin-stat-c"><div class="admin-stat-n">12</div><div class="admin-stat-l">Bekleyen</div></div>
+      </div>
+      <div style="padding:14px 16px 0">
+        <div style="font-family:var(--font-d);font-size:12px;font-weight:800;color:var(--brown-mid);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px">Hızlı Erişim</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px">
+          <div onclick="adminTab('basvurular',document.querySelector('.ap-tab:nth-child(3)'))" style="background:var(--brown-light);border-radius:var(--r-md);padding:14px;cursor:pointer">
+            <div style="font-size:18px;margin-bottom:6px">📋</div>
+            <div style="font-family:var(--font-d);font-size:12px;font-weight:800;color:var(--brown-dark)">Başvuruları İncele</div>
+            <div style="font-size:11px;color:var(--brown-mid);margin-top:2px">12 bekliyor</div>
+          </div>
+          <div onclick="adminTab('finans',document.querySelector('.ap-tab:nth-child(4)'))" style="background:var(--green-light);border-radius:var(--r-md);padding:14px;cursor:pointer">
+            <div style="font-size:18px;margin-bottom:6px">💰</div>
+            <div style="font-family:var(--font-d);font-size:12px;font-weight:800;color:var(--green-dark)">Mali Durum</div>
+            <div style="font-size:11px;color:var(--green-mid);margin-top:2px">Aylık özet</div>
+          </div>
+          <div onclick="goTo('uye-basvuru')" style="background:var(--green-light);border-radius:var(--r-md);padding:14px;cursor:pointer">
+            <div style="font-size:18px;margin-bottom:6px">➕</div>
+            <div style="font-family:var(--font-d);font-size:12px;font-weight:800;color:var(--green-dark)">Yeni Üye Ekle</div>
+            <div style="font-size:11px;color:var(--green-mid);margin-top:2px">Kayıt formu</div>
+          </div>
+          <div onclick="goTo('kongre')" style="background:var(--brown-light);border-radius:var(--r-md);padding:14px;cursor:pointer">
+            <div style="font-size:18px;margin-bottom:6px">🎓</div>
+            <div style="font-family:var(--font-d);font-size:12px;font-weight:800;color:var(--brown-dark)">IV. ICMLD</div>
+            <div style="font-size:11px;color:var(--brown-mid);margin-top:2px">Ekim 2026</div>
+          </div>
+        </div>
+        <div style="font-family:var(--font-d);font-size:12px;font-weight:800;color:var(--brown-mid);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px">Son Aktiviteler</div>
+        <div id="activity-list-admin"></div>
+      </div>
+    </div>
+    <!-- ÜYELER -->
+    <div class="ap-panel" id="ap-uyeler">
+      <div style="padding:0 16px;display:flex;flex-direction:column;gap:0;padding-top:14px">
+        <div class="uye-card"><div class="uye-av" style="background:var(--green-dark)">YM</div><div class="uye-info"><div class="uye-name">Prof. Dr. Yılmaz Mutlu</div><div class="uye-role">YK Başkanı · Muş</div></div><span class="uye-badge" style="background:var(--green-light);color:var(--green-dark)">Başkan</span></div>
+        <div class="uye-card"><div class="uye-av" style="background:var(--brown)">SO</div><div class="uye-info"><div class="uye-name">Prof. Dr. Sinan Olkun</div><div class="uye-role">Onursal Başkan</div></div><span class="uye-badge" style="background:var(--brown-light);color:var(--brown-dark)">Onursal</span></div>
+        <div class="uye-card"><div class="uye-av" style="background:var(--green-mid)">ZÇ</div><div class="uye-info"><div class="uye-name">Doç. Dr. Zekeriya Çam</div><div class="uye-role">YK Başkan Yardımcısı</div></div></div>
+        <div class="uye-card"><div class="uye-av" style="background:var(--green)">ÇD</div><div class="uye-info"><div class="uye-name">Çiğdem Demirtaş</div><div class="uye-role">Genel Sekreter</div></div></div>
+        <div class="uye-card"><div class="uye-av" style="background:var(--green-dark)">EG</div><div class="uye-info"><div class="uye-name">Edanur Güven</div><div class="uye-role">Eğitim Koordinatörü · YK Üyesi</div></div></div>
+        <div class="uye-card"><div class="uye-av" style="background:var(--brown-mid)">YE</div><div class="uye-info"><div class="uye-name">Dr. Yavuz Erdem</div><div class="uye-role">Mali İşler Yönetimi</div></div></div>
+        <div style="height:24px"></div>
+      </div>
+    </div>
+    <!-- BAŞVURULAR -->
+    <div class="ap-panel" id="ap-basvurular">
+      <div style="padding:14px 16px">
+        <div class="basvuru-item"><div class="basvuru-status status-bekliyor"></div><div style="flex:1"><div class="basvuru-name">Ahmet Kaya</div><div class="basvuru-meta">Üyelik · Matematik Öğretmeni · Ankara · 3 gün önce</div><div class="basvuru-actions"><button class="btn-kucuk btn-kabul" onclick="kararVer(this,'kabul')">✓ Kabul</button><button class="btn-kucuk btn-red" onclick="kararVer(this,'red')">✗ Reddet</button></div></div><span class="basvuru-badge" style="background:#FEF3C7;color:#92400E">Bekliyor</span></div>
+        <div class="basvuru-item"><div class="basvuru-status status-bekliyor"></div><div style="flex:1"><div class="basvuru-name">Fatma Şahin</div><div class="basvuru-meta">İl Temsilciliği · PDR · İzmir · 5 gün önce</div><div class="basvuru-actions"><button class="btn-kucuk btn-kabul" onclick="kararVer(this,'kabul')">✓ Kabul</button><button class="btn-kucuk btn-red" onclick="kararVer(this,'red')">✗ Reddet</button></div></div><span class="basvuru-badge" style="background:#FEF3C7;color:#92400E">Bekliyor</span></div>
+        <div class="basvuru-item"><div class="basvuru-status status-kabul"></div><div style="flex:1"><div class="basvuru-name">Mehmet Demir</div><div class="basvuru-meta">Üyelik · Özel Eğitim Uzmanı · Bursa · 1 hafta önce</div></div><span class="basvuru-badge" style="background:var(--green-light);color:var(--green-dark)">Kabul</span></div>
+      </div>
+    </div>
+    <!-- FİNANS -->
+    <div class="ap-panel" id="ap-finans">
+      <div style="padding:14px 16px 0">
+        <div class="finans-card"><div class="finans-header"><span>Nisan 2026 — Gelirler</span></div><div class="finans-row"><div class="finans-label">Aidat Gelirleri</div><div class="finans-val finans-pos">+84.000 ₺</div></div><div class="finans-row"><div class="finans-label">Eğitim Gelirleri</div><div class="finans-val finans-pos">+32.500 ₺</div></div><div class="finans-row"><div class="finans-label">Kongre Katılım</div><div class="finans-val finans-pos">+15.000 ₺</div></div><div class="finans-row" style="border-top:2px solid var(--gray-100)"><div class="finans-label" style="font-weight:700">Toplam Gelir</div><div class="finans-val finans-pos" style="font-size:16px">+131.500 ₺</div></div></div>
+        <div class="finans-card"><div class="finans-header" style="background:var(--brown-dark)"><span>Giderler</span></div><div class="finans-row"><div class="finans-label">Platform & Yazılım</div><div class="finans-val finans-neg">-4.200 ₺</div></div><div class="finans-row"><div class="finans-label">Kongre Hazırlığı</div><div class="finans-val finans-neg">-18.000 ₺</div></div><div class="finans-row" style="border-top:2px solid var(--gray-100)"><div class="finans-label" style="font-weight:700">Net Bakiye</div><div class="finans-val finans-pos" style="font-size:16px">+105.800 ₺</div></div></div>
+        <div style="height:24px"></div>
+      </div>
+    </div>
+    <!-- ETKİNLİKLER -->
+    <div class="ap-panel" id="ap-etkinlikler">
+      <div style="padding:14px 16px 0">
+        <div class="section-card" style="margin:0 0 12px">
+          <div class="section-card-head">Nisan 2026</div>
+          <div style="padding:0 14px">
+            <div class="etkinlik-item"><div class="etkinlik-tarih"><div class="etkinlik-gun">29</div><div class="etkinlik-ay">Nis</div></div><div class="etkinlik-body"><div class="etkinlik-title">III. Kongre — Muş Alparslan Ünv.</div><div class="etkinlik-sub">Muş · 2 gün</div></div></div>
+          </div>
+        </div>
+        <div class="section-card" style="margin:0 0 12px">
+          <div class="section-card-head">Ekim 2026</div>
+          <div style="padding:0 14px">
+            <div class="etkinlik-item"><div class="etkinlik-tarih"><div class="etkinlik-gun">1</div><div class="etkinlik-ay">Eki</div></div><div class="etkinlik-body"><div class="etkinlik-title">IV. ICMLD Kongresi</div><div class="etkinlik-sub">İstanbul Medeniyet Üni. · 3 gün</div></div></div>
+          </div>
+        </div>
+        <div style="height:24px"></div>
+      </div>
+    </div>
+    <!-- YK -->
+    <div class="ap-panel" id="ap-yk">
+      <div style="padding:14px 16px 0">
+        <div style="font-family:var(--font-d);font-size:12px;font-weight:800;color:var(--brown-mid);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px">Yönetim Kurulu</div>
+        <div class="yk-card"><div class="yk-av" style="background:var(--green-dark)">YM</div><div><div class="yk-name">Prof. Dr. Yılmaz Mutlu</div><div class="yk-gorev">YK Başkanı · Tam Yetkili</div><div class="yk-detail">Muş Alparslan Ünv. · Kurucu</div></div></div>
+        <div class="yk-card"><div class="yk-av" style="background:var(--brown)">SO</div><div><div class="yk-name">Prof. Dr. Sinan Olkun</div><div class="yk-gorev">Onursal Başkan</div></div></div>
+        <div class="yk-card"><div class="yk-av" style="background:var(--green-mid)">ZÇ</div><div><div class="yk-name">Doç. Dr. Zekeriya Çam</div><div class="yk-gorev">YK Başkan Yardımcısı</div></div></div>
+        <div class="yk-card"><div class="yk-av" style="background:var(--green)">ÇD</div><div><div class="yk-name">Çiğdem Demirtaş</div><div class="yk-gorev">Genel Sekreter</div></div></div>
+        <div class="yk-card"><div class="yk-av" style="background:var(--green-dark)">EG</div><div><div class="yk-name">Edanur Güven</div><div class="yk-gorev">Eğitim Koordinatörü · YK Üyesi</div></div></div>
+        <div class="yk-card"><div class="yk-av" style="background:var(--brown-mid)">YE</div><div><div class="yk-name">Dr. Yavuz Erdem</div><div class="yk-gorev">Mali İşler Yönetimi</div></div></div>
+        <div style="font-family:var(--font-d);font-size:12px;font-weight:800;color:var(--brown-mid);text-transform:uppercase;letter-spacing:.6px;margin:16px 0 10px">Denetleme Kurulu</div>
+        <div class="yk-card"><div class="yk-av" style="background:var(--green-dark)">İS</div><div><div class="yk-name">Dr. İhsan Söylemez</div><div class="yk-gorev">Denetleme Kurulu Başkanı · Tam Yetkili</div></div></div>
+        <div class="yk-card"><div class="yk-av" style="background:var(--green-mid)">EF</div><div><div class="yk-name">Dr. Emir Feridun Çalışkan</div><div class="yk-gorev">Denetleme Kurulu Başkan Yrd.</div></div></div>
+        <div class="yk-card"><div class="yk-av" style="background:var(--green)">SU</div><div><div class="yk-name">Dr. Semih Uçar</div><div class="yk-gorev">Denetleme Kurulu Asıl Üye</div></div></div>
+        <div style="height:24px"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ═══════════ MODALLER ═══════════ -->
+<div class="modal-bg" id="notif-modal" onclick="closeModal('notif-modal',event)">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-head"><div class="modal-title">Bildirimler</div><div class="modal-sub">3 okunmamış</div></div>
+    <div class="modal-body" id="notif-list"></div>
+  </div>
+</div>
+<div class="modal-bg" id="post-modal" onclick="closeModal('post-modal',event)">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-head"><div class="modal-title">Yeni Gönderi</div></div>
+    <div class="modal-body">
+      <textarea style="width:100%;min-height:120px;background:var(--gray-50);border:1.5px solid var(--gray-200);border-radius:var(--r-md);padding:12px;font-size:14px;resize:vertical;color:var(--gray-800);font-family:var(--font-b)" placeholder="Düşüncelerinizi paylaşın..."></textarea>
+      <div style="height:12px"></div>
+      <button class="btn-p">Paylaş</button>
+    </div>
+
+    <!-- İçerik yönetimi: IcerikPanel.js bu konteynera render eder. -->
+    <div class="ap-panel" id="ap-icerik"></div>
+
+  </div>
+</div>
+
+</div>
+<!-- ═══════════ ÜYELİK BAŞVURUSU ═══════════ -->
+<div class="screen" id="screen-uye-basvuru" role="region" aria-label="Üye Başvurusu">
+  <div class="topbar"><button class="back-btn" onclick="goBack()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button><div class="topbar-center">Üyelik Başvurusu</div><div style="width:32px"></div></div>
+  <div class="screen-body">
+    <div class="step-bar"><div class="step-item active" id="ustep1"><div class="step-dot">1</div><div class="step-label">Kişisel</div></div><div class="step-item" id="ustep2"><div class="step-dot">2</div><div class="step-label">Mesleki</div></div><div class="step-item" id="ustep3"><div class="step-dot">3</div><div class="step-label">Aidat</div></div></div>
+    <div id="uye-step1">
+      <div class="basvuru-hero uyelik" style="margin-top:14px"><div class="basvuru-hero-title">Kişisel Bilgiler</div><div class="basvuru-hero-sub">Başvurunuz yönetim kurulunca 30 gün içinde değerlendirilir.</div></div>
+      <div class="form-section">
+        <div class="form-field"><label>Ad *</label><input type="text" id="u-ad" placeholder="Adınız"></div>
+        <div class="form-field"><label>Soyad *</label><input type="text" id="u-soyad" placeholder="Soyadınız"></div>
+        <div class="form-field"><label>E-posta *</label><input type="email" id="u-email" placeholder="ornek@mail.com"></div>
+        <div class="form-field"><label>Telefon</label><input type="tel" id="u-tel" placeholder="05XX XXX XX XX"></div>
+        <div class="form-field"><label>İl *</label><select id="u-il"><option value="">İl seçiniz...</option><option>Adana</option><option>Adıyaman</option><option>Afyonkarahisar</option><option>Ağrı</option><option>Amasya</option><option>Ankara</option><option>Antalya</option><option>Artvin</option><option>Aydın</option><option>Balıkesir</option><option>Bilecik</option><option>Bingöl</option><option>Bitlis</option><option>Bolu</option><option>Burdur</option><option>Bursa</option><option>Çanakkale</option><option>Çankırı</option><option>Çorum</option><option>Denizli</option><option>Diyarbakır</option><option>Edirne</option><option>Elazığ</option><option>Erzincan</option><option>Erzurum</option><option>Eskişehir</option><option>Gaziantep</option><option>Giresun</option><option>Gümüşhane</option><option>Hakkari</option><option>Hatay</option><option>Isparta</option><option>Mersin</option><option>İstanbul</option><option>İzmir</option><option>Kars</option><option>Kastamonu</option><option>Kayseri</option><option>Kırklareli</option><option>Kırşehir</option><option>Kocaeli</option><option>Konya</option><option>Kütahya</option><option>Malatya</option><option>Manisa</option><option>Kahramanmaraş</option><option>Mardin</option><option>Muğla</option><option>Muş</option><option>Nevşehir</option><option>Niğde</option><option>Ordu</option><option>Rize</option><option>Sakarya</option><option>Samsun</option><option>Siirt</option><option>Sinop</option><option>Sivas</option><option>Tekirdağ</option><option>Tokat</option><option>Trabzon</option><option>Tunceli</option><option>Şanlıurfa</option><option>Uşak</option><option>Van</option><option>Yozgat</option><option>Zonguldak</option><option>Aksaray</option><option>Bayburt</option><option>Karaman</option><option>Kırıkkale</option><option>Batman</option><option>Şırnak</option><option>Bartın</option><option>Ardahan</option><option>Iğdır</option><option>Yalova</option><option>Karabük</option><option>Kilis</option><option>Osmaniye</option><option>Düzce</option></select></div>
+        <button class="btn-submit" onclick="uyeStep(2)">Devam Et →</button><div style="height:24px"></div>
+      </div>
+    </div>
+    <div id="uye-step2" style="display:none">
+      <div class="basvuru-hero uyelik" style="margin-top:14px"><div class="basvuru-hero-title">Mesleki Bilgiler</div><div class="basvuru-hero-sub">Diskalkuli alanındaki deneyiminizi paylaşın.</div></div>
+      <div class="form-section">
+        <div class="form-field"><label>Meslek *</label><select id="u-meslek"><option value=''>Seçiniz...</option><option>Matematik Öğretmeni</option><option>Sınıf Öğretmeni</option><option>Özel Eğitim Öğretmeni</option><option>Akademisyen / Araştırmacı</option><option>Okul Psikolojik Danışmanı (PDR)</option><option>Psikolog</option><option>Çocuk Gelişimi Uzmanı</option><option>Veli / Aile</option><option>Diğer</option></select></div>
+        <div class="form-field"><label>Kurum</label><input type="text" id="u-kurum" placeholder="Çalıştığınız kurum"></div>
+        <div class="form-field"><label>Diskalkuli Deneyimi</label><textarea id="u-deneyim" placeholder="Bu alandaki çalışmalarınızı kısaca belirtiniz..."></textarea></div>
+        <div style="display:flex;gap:10px"><button class="btn-submit" style="background:var(--gray-200);color:var(--gray-700);box-shadow:none" onclick="uyeStep(1)">← Geri</button><button class="btn-submit" onclick="uyeStep(3)">Devam Et →</button></div><div style="height:24px"></div>
+      </div>
+    </div>
+    <div id="uye-step3" style="display:none">
+      <div class="basvuru-hero uyelik" style="margin-top:14px"><div class="basvuru-hero-title">Aidat & Onay</div><div class="basvuru-hero-sub">Aylık 200 ₺ aidat ve onay</div></div>
+      <div style="height:12px"></div>
+      <div class="aidatlar-grid"><div class="aidat-card featured"><div class="aidat-tip">Asıl Üye</div><div class="aidat-fiyat">200 <span>₺/ay</span></div></div><div class="aidat-card"><div class="aidat-tip">Onursal</div><div class="aidat-fiyat">—</div><div style="font-size:11px;color:var(--gray-400)">YK kararıyla</div></div></div>
+      <div class="form-info-box"><p>Başvurunuz <strong>30 gün içinde</strong> değerlendirilecek, sonuç e-posta ile bildirilecektir.</p></div>
+      <div class="form-section">
+        <div class="form-checkbox-row"><input type="checkbox" id="u-kvkk"><span>KVKK Aydınlatma Metni'ni okudum, kabul ediyorum.</span></div>
+        <div style="height:8px"></div>
+        <div class="form-checkbox-row"><input type="checkbox" id="u-tuzuk"><span>Dernek tüzüğünü okudum, hükümlerine uymayı kabul ediyorum.</span></div>
+        <div style="height:16px"></div>
+        <div style="display:flex;gap:10px"><button class="btn-submit" style="background:var(--gray-200);color:var(--gray-700);box-shadow:none" onclick="uyeStep(2)">← Geri</button><button class="btn-submit" onclick="submitUyeBasvuru()">Gönder ✓</button></div><div style="height:24px"></div>
+      </div>
+    </div>
+    <div class="success-screen" id="uye-success">
+      <div class="success-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="success-title">Başvurunuz Alındı!</div>
+      <div class="success-text">Yönetim Kurulu en geç <strong>30 gün</strong> içinde değerlendirecek ve e-posta ile bildirecektir.</div>
+      <button class="btn-submit" onclick="goTo('uye')" style="margin-top:8px;max-width:220px">Geri Dön</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ TEMSİLCİLİK BAŞVURUSU ═══════════ -->
+<div class="screen" id="screen-temsilci-basvuru" role="region" aria-label="Temsilcilik Başvurusu">
+  <div class="topbar" style="background:linear-gradient(90deg,var(--brown-dark),var(--brown))"><button class="back-btn" onclick="goBack()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button><div class="topbar-center">İl Temsilciliği Başvurusu</div><div style="width:32px"></div></div>
+  <div class="screen-body">
+    <div id="temsilci-form">
+      <div class="basvuru-hero temsilci" style="margin-top:14px"><div class="basvuru-hero-title">İl Temsilcisi Olmak İster misiniz?</div><div class="basvuru-hero-sub">Bulunduğunuz ilde Diskalkuli Derneği'ni temsil edin.</div></div>
+      <div class="form-section">
+        <div class="form-field"><label>Ad Soyad *</label><input type="text" id="t-adsoyad" placeholder="Ad ve soyadınız"></div>
+        <div class="form-field"><label>E-posta *</label><input type="email" id="t-email" placeholder="ornek@mail.com"></div>
+        <div class="form-field"><label>Telefon *</label><input type="tel" id="t-tel" placeholder="05XX XXX XX XX"></div>
+        <div class="form-field"><label>Temsil Edeceğiniz İl *</label><select id="t-il"><option value="">İl seçiniz...</option><option>Adana</option><option>Adıyaman</option><option>Afyonkarahisar</option><option>Ağrı</option><option>Amasya</option><option>Ankara</option><option>Antalya</option><option>Artvin</option><option>Aydın</option><option>Balıkesir</option><option>Bilecik</option><option>Bingöl</option><option>Bitlis</option><option>Bolu</option><option>Burdur</option><option>Bursa</option><option>Çanakkale</option><option>Çankırı</option><option>Çorum</option><option>Denizli</option><option>Diyarbakır</option><option>Edirne</option><option>Elazığ</option><option>Erzincan</option><option>Erzurum</option><option>Eskişehir</option><option>Gaziantep</option><option>Giresun</option><option>Gümüşhane</option><option>Hakkari</option><option>Hatay</option><option>Isparta</option><option>Mersin</option><option>İstanbul</option><option>İzmir</option><option>Kars</option><option>Kastamonu</option><option>Kayseri</option><option>Kırklareli</option><option>Kırşehir</option><option>Kocaeli</option><option>Konya</option><option>Kütahya</option><option>Malatya</option><option>Manisa</option><option>Kahramanmaraş</option><option>Mardin</option><option>Muğla</option><option>Muş</option><option>Nevşehir</option><option>Niğde</option><option>Ordu</option><option>Rize</option><option>Sakarya</option><option>Samsun</option><option>Siirt</option><option>Sinop</option><option>Sivas</option><option>Tekirdağ</option><option>Tokat</option><option>Trabzon</option><option>Tunceli</option><option>Şanlıurfa</option><option>Uşak</option><option>Van</option><option>Yozgat</option><option>Zonguldak</option><option>Aksaray</option><option>Bayburt</option><option>Karaman</option><option>Kırıkkale</option><option>Batman</option><option>Şırnak</option><option>Bartın</option><option>Ardahan</option><option>Iğdır</option><option>Yalova</option><option>Karabük</option><option>Kilis</option><option>Osmaniye</option><option>Düzce</option></select></div>
+        <div class="form-field"><label>Meslek *</label><select id="t-meslek"><option value=''>Seçiniz...</option><option>Matematik Öğretmeni</option><option>Sınıf Öğretmeni</option><option>Özel Eğitim Öğretmeni</option><option>Akademisyen / Araştırmacı</option><option>Okul Psikolojik Danışmanı (PDR)</option><option>Psikolog</option><option>Çocuk Gelişimi Uzmanı</option><option>Veli / Aile</option><option>Diğer</option></select></div>
+        <div class="form-field"><label>Deneyim *</label><textarea id="t-deneyim" placeholder="Diskalkuli alanındaki çalışmalarınızı açıklayınız..."></textarea></div>
+      </div>
+      <div class="form-info-box" style="background:var(--brown-light);border-color:var(--brown)"><p style="color:var(--brown-dark)"><strong>Görevler:</strong> İlde farkındalık etkinlikleri düzenlemek, kongre ve eğitimlere katılımı artırmak.</p></div>
+      <div class="form-section">
+        <div class="form-checkbox-row"><input type="checkbox" id="t-kvkk"><span>KVKK Aydınlatma Metni'ni okudum, kabul ediyorum.</span></div>
+        <div style="height:8px"></div>
+        <div class="form-checkbox-row"><input type="checkbox" id="t-gorev"><span>Temsilcilik sorumluluklarını yerine getirmeyi kabul ediyorum.</span></div>
+        <div style="height:16px"></div>
+        <button class="btn-submit brown" onclick="submitTemsilciBasvuru()">Başvuruyu Gönder ✓</button><div style="height:24px"></div>
+      </div>
+    </div>
+    <div class="success-screen" id="temsilci-success">
+      <div class="success-icon" style="background:var(--brown-light)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--brown-dark)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="success-title" style="color:var(--brown-dark)">Başvurunuz Alındı!</div>
+      <div class="success-text">Yönetim Kurulu değerlendirmesinin ardından sizinle iletişime geçilecektir.</div>
+      <button class="btn-submit brown" onclick="goTo('uye')" style="margin-top:8px;max-width:220px">Geri Dön</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- ═══════════ GLOBAL NAV ═══════════ -->
+<nav id="global-nav" aria-label="Ana navigasyon">
+  <div class="nav-item" id="gnav-home" onclick="setTab(this,'home')" role="tab" tabindex="0" aria-label="Ana Sayfa">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span data-i18n="nav.home">Ana Sayfa</span><div class="nav-pip"></div>
+  </div>
+  <div class="nav-item" id="gnav-egitim" onclick="setTab(this,'egitim')" role="tab" tabindex="0" aria-label="Eğitimler">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+    <span data-i18n="nav.education">Eğitimler</span><div class="nav-pip"></div>
+  </div>
+  <div class="nav-item" id="gnav-kongre" onclick="setTab(this,'kongre')" role="tab" tabindex="0" aria-label="Kongre">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    <span>Kongre</span><div class="nav-pip"></div>
+  </div>
+  <div class="nav-item" id="gnav-profil" onclick="setTab(this,'profil')" role="tab" tabindex="0" aria-label="Profil">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <span data-i18n="nav.profile">Profil</span><div class="nav-pip"></div>
+  </div>
+</nav>
+<!-- /app -->
+
+<!-- Entry point: boots the App, attaches services, installs compat shims -->
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>

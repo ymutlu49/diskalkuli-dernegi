@@ -1,0 +1,125 @@
+/* ══════════════════════════════════════════════
+   Diskalkuli Derneği — Design tokens, reset, base typography
+   ══════════════════════════════════════════════ */
+
+/* ══════════════════════════════════════════════
+   DESIGN SYSTEM — Diskalkuli Derneği
+   Logo renkleri: Yeşil #2E7D32 · Kahve #A0522D
+   ══════════════════════════════════════════════ */
+:root {
+  color-scheme: light dark;
+
+  --green:        #2E7D32;
+  --green-dark:   #1B5E20;
+  --green-mid:    #388E3C;
+  --green-light:  #E8F5E9;
+  --green-surf:   #C8E6C9;
+  --brown:        #A0522D;
+  --brown-dark:   #7B3A1E;
+  --brown-mid:    #BF6A3A;
+  --brown-light:  #FBF0E8;
+  --brown-surf:   #F3DCC8;
+  --gray-50:  #FAFAF8; --gray-100: #F4F1EC;
+  --gray-200: #E5DDD3; --gray-300: #CFC5B8;
+  --gray-400: #A89D90; --gray-600: #6B5E52;
+  --gray-700: #463A30; --gray-800: #2C2018;
+  --white: #FFFFFF;
+  --surface: #FFFFFF;
+  --surface-muted: #FAFAF8;
+  --body-bg: #f0f0ee;
+  --danger: #C62828; --danger-bg: #FFEBEE;
+
+  --font-d: 'Nunito', sans-serif;
+  --font-b: 'Nunito Sans', sans-serif;
+  --r-xs:4px; --r-sm:10px; --r-md:14px;
+  --r-lg:20px; --r-xl:28px; --r-full:9999px;
+  --sh-xs: 0 1px 4px rgba(46,125,50,.07);
+  --sh-sm: 0 2px 8px rgba(46,125,50,.10);
+  --sh-md: 0 4px 18px rgba(46,125,50,.14);
+  --t: 180ms ease; --ts: 300ms ease;
+}
+
+/* ──────────────────────────────────────────────
+   Dark mode tokens.
+   Activated via prefers-color-scheme: dark, OR
+   manually via <html data-theme="dark"> for users
+   who want to override system preference.
+   ────────────────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --green:        #66BB6A;
+    --green-dark:   #2E7D32;
+    --green-mid:    #4CAF50;
+    --green-light:  #1B3A1E;
+    --green-surf:   #1F4D23;
+    --brown:        #D48A5C;
+    --brown-dark:   #A0522D;
+    --brown-mid:    #BF6A3A;
+    --brown-light:  #3A2415;
+    --brown-surf:   #4E2F1D;
+
+    --gray-50:  #1A1A1A; --gray-100: #242424;
+    --gray-200: #2E2E2E; --gray-300: #3A3A3A;
+    --gray-400: #9A9A9A; --gray-600: #CFCFCF;
+    --gray-700: #E5E5E5; --gray-800: #F5F5F5;
+    --white:    #1E1E1E;
+
+    --surface:       #1E1E1E;
+    --surface-muted: #242424;
+    --body-bg:       #0F0F0F;
+
+    --danger:    #EF5350;
+    --danger-bg: #4A1618;
+
+    --sh-xs: 0 1px 4px rgba(0,0,0,.35);
+    --sh-sm: 0 2px 8px rgba(0,0,0,.45);
+    --sh-md: 0 4px 18px rgba(0,0,0,.55);
+  }
+}
+
+/* Manual dark override */
+:root[data-theme="dark"] {
+  --green:        #66BB6A;
+  --green-dark:   #2E7D32;
+  --green-mid:    #4CAF50;
+  --green-light:  #1B3A1E;
+  --green-surf:   #1F4D23;
+  --brown:        #D48A5C;
+  --brown-dark:   #A0522D;
+  --brown-mid:    #BF6A3A;
+  --brown-light:  #3A2415;
+  --brown-surf:   #4E2F1D;
+
+  --gray-50:  #1A1A1A; --gray-100: #242424;
+  --gray-200: #2E2E2E; --gray-300: #3A3A3A;
+  --gray-400: #9A9A9A; --gray-600: #CFCFCF;
+  --gray-700: #E5E5E5; --gray-800: #F5F5F5;
+  --white:    #1E1E1E;
+
+  --surface:       #1E1E1E;
+  --surface-muted: #242424;
+  --body-bg:       #0F0F0F;
+
+  --danger:    #EF5350;
+  --danger-bg: #4A1618;
+
+  --sh-xs: 0 1px 4px rgba(0,0,0,.35);
+  --sh-sm: 0 2px 8px rgba(0,0,0,.45);
+  --sh-md: 0 4px 18px rgba(0,0,0,.55);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+html,body{height:100%;width:100%;max-width:100%;overflow-x:hidden;background:var(--body-bg);font-family:var(--font-b);font-size:15px;color:var(--gray-800);-webkit-font-smoothing:antialiased}
+
+input,textarea,select{font-family:inherit;font-size:inherit;border:none;outline:none;background:none;color:inherit}
+
+/* High-contrast outline on interactive elements for keyboard users. */
+a:not([class]):focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid #FFD54F;
+  outline-offset: 2px;
+}

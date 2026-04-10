@@ -1,0 +1,208 @@
+/* ══════════════════════════════════════════════
+   Diskalkuli Derneği — Mobile polish: safe-area insets, touch targets, PWA shell
+   ══════════════════════════════════════════════ */
+
+
+/* Fill the entire viewport height on mobile Safari, including the
+   dynamic bottom bar. Fallback to 100vh where dvh is unsupported. */
+html, body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--body-bg, #f0f0ee);
+}
+
+body {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* The phone-sized shell needs to be full-height, not clamped to 100vh,
+   so iOS Safari's expanding URL bar doesn't create a dead zone. */
+#app {
+  height: 100vh;
+  height: 100dvh;
+  min-height: 100dvh;
+  padding-top: env(safe-area-inset-top);
+}
+
+/* Respect the bottom safe-area on iOS for the global nav. */
+#global-nav,
+.bottom-nav {
+  padding-bottom: calc(6px + env(safe-area-inset-bottom));
+}
+
+/* Enlarge icon buttons to meet 44×44 Apple HIG minimum touch target.
+   Visual size is preserved via a centered inner hit-area. */
+.icon-btn,
+.back-btn {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.nav-item {
+  min-height: 48px;
+}
+
+/* Disable iOS double-tap zoom on interactive elements. */
+button,
+.chip,
+.nav-item,
+.card,
+.mod-card,
+.list-row,
+.auth-role-card,
+.faq-q {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevent iOS input zoom: inputs must be >= 16px. */
+input,
+textarea,
+select {
+  font-size: 16px;
+}
+
+/* Smooth inertial scrolling on the scrollable bodies. */
+.screen-body,
+.auth-body,
+.login-body {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* When installed as a standalone PWA, hide any browser fallback chrome. */
+@media (display-mode: standalone) {
+  body {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  /* Allow selection inside text areas / inputs even in standalone mode. */
+  input, textarea, [contenteditable], .selectable {
+    user-select: text;
+    -webkit-user-select: text;
+  }
+}
+
+/* Narrow phones (<= 360px): tighten padding so content doesn't clip. */
+@media (max-width: 360px) {
+  .mod-grid,
+  .manipulative-grid,
+  .stats {
+    gap: 8px;
+  }
+  .hero,
+  .admin-hero {
+    padding: 16px;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   Tablet & desktop (>= 768px): center the phone
+   shell and add a subtle side gutter. The app is
+   mobile-first, so on larger screens we simply
+   frame the phone-width column instead of
+   redesigning the layout.
+   ───────────────────────────────────────────── */
+@media (min-width: 768px) {
+  body {
+    background:
+      radial-gradient(ellipse at top, rgba(46, 125, 50, 0.05), transparent 60%),
+      var(--body-bg, #f0f0ee);
+  }
+  #app {
+    max-width: 430px;
+    margin: 0 auto;
+    box-shadow: 0 0 48px rgba(0, 0, 0, 0.12);
+    border-left:  1px solid var(--gray-200);
+    border-right: 1px solid var(--gray-200);
+  }
+  /* The bottom nav also needs to constrain to the shell width. */
+  #global-nav,
+  .bottom-nav {
+    max-width: 430px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+  }
+}
+
+/* Desktops with plenty of height: add a little breathing room. */
+@media (min-width: 1024px) and (min-height: 900px) {
+  #app {
+    height: min(920px, 100vh);
+    border-radius: 18px;
+    overflow: hidden;
+    margin-top: calc((100vh - min(920px, 100vh)) / 2);
+  }
+}
+
+/* Landscape on short devices: push the nav bar out of the way. */
+@media (orientation: landscape) and (max-height: 500px) {
+  #global-nav,
+  .bottom-nav {
+    padding-bottom: 4px;
+  }
+  #app {
+    padding-top: 0;
+  }
+}
+
+/* High-contrast / reduced motion preferences. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Windows high-contrast / forced-colors support.
+   Remove custom gradients, use system colors, keep focus rings visible. */
+@media (forced-colors: active) {
+  button,
+  .chip,
+  .nav-item,
+  .card,
+  .mod-card {
+    border: 1px solid CanvasText;
+    forced-color-adjust: none;
+    background: Canvas;
+    color: CanvasText;
+  }
+  a {
+    color: LinkText;
+  }
+  :focus-visible {
+    outline: 2px solid Highlight !important;
+  }
+}
+
+/* Print-friendly: hide interactive chrome, keep content readable. */
+@media print {
+  #global-nav,
+  .bottom-nav,
+  .topbar,
+  .hero,
+  .splash-footer,
+  .confirm-overlay,
+  .modal-bg,
+  .app-toast {
+    display: none !important;
+  }
+  #app {
+    height: auto;
+    box-shadow: none;
+  }
+  .screen {
+    display: block !important;
+    opacity: 1 !important;
+    page-break-after: always;
+  }
+  body {
+    background: #fff;
+    color: #000;
+  }
+}

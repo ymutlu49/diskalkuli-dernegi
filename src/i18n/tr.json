@@ -1,0 +1,125 @@
+{
+  "app": {
+    "name": "Diskalkuli Derneği",
+    "tagline": "Herkes Matematik Öğrenebilir"
+  },
+  "nav": {
+    "home": "Ana Sayfa",
+    "news": "Haberler",
+    "education": "Eğitim",
+    "community": "Topluluk",
+    "profile": "Profil",
+    "admin": "Yönetim",
+    "settings": "Ayarlar",
+    "back": "Geri",
+    "skipToNav": "Navigasyona geç"
+  },
+  "auth": {
+    "login": "Giriş Yap",
+    "logout": "Çıkış Yap",
+    "loggingIn": "Giriş yapılıyor...",
+    "email": "E-posta",
+    "emailPlaceholder": "ornek@mail.com",
+    "password": "Şifre",
+    "passwordPlaceholder": "Şifreniz",
+    "forgotPassword": "Şifremi unuttum",
+    "showPassword": "Şifreyi göster",
+    "hidePassword": "Şifreyi gizle",
+    "viewAsDemo": "Demo hesaplarla görüntüle",
+    "welcome": "Hoş geldiniz",
+    "errors": {
+      "emailRequired": "E-posta adresinizi girin.",
+      "emailInvalid": "Geçerli bir e-posta adresi girin.",
+      "passwordRequired": "Şifrenizi girin.",
+      "invalidCredentials": "E-posta veya şifre hatalı.",
+      "demoModeDisabled": "Canlı giriş modu henüz hazır değil. Lütfen demo modu kullanın.",
+      "alreadyPending": "Zaten bir giriş işlemi devam ediyor."
+    }
+  },
+  "common": {
+    "save": "Kaydet",
+    "cancel": "İptal",
+    "confirm": "Onayla",
+    "delete": "Sil",
+    "edit": "Düzenle",
+    "close": "Kapat",
+    "search": "Ara",
+    "loading": "Yükleniyor...",
+    "error": "Bir sorun oluştu. Lütfen tekrar deneyin.",
+    "retry": "Tekrar dene",
+    "success": "Başarılı",
+    "required": "Bu alan zorunludur.",
+    "optional": "İsteğe bağlı",
+    "yes": "Evet",
+    "no": "Hayır",
+    "all": "Tümü",
+    "none": "Hiçbiri",
+    "more": "Daha fazla",
+    "less": "Daha az",
+    "today": "Bugün",
+    "yesterday": "Dün",
+    "tomorrow": "Yarın"
+  },
+  "validation": {
+    "required": "Bu alan zorunludur.",
+    "email": "Geçerli bir e-posta adresi girin.",
+    "minLength": "En az {n} karakter olmalı.",
+    "maxLength": "En fazla {n} karakter olabilir.",
+    "phone": "Telefon numarası geçersiz.",
+    "tcKimlik": "TC Kimlik No geçersiz.",
+    "checked": "Bu alanı işaretlemelisiniz.",
+    "match": "İki değer eşleşmiyor."
+  },
+  "admin": {
+    "title": "Yönetim Paneli",
+    "overview": "Özet",
+    "members": "Üyeler",
+    "applications": "Başvurular",
+    "finance": "Finans",
+    "events": "Etkinlikler",
+    "board": "Yönetim Kurulu",
+    "content": "İçerik",
+    "dues": "Aidat",
+    "audit": "Denetim",
+    "reports": "Rapor",
+    "exportCsv": "CSV olarak dışa aktar",
+    "notEnoughPermission": "Yetersiz yetki.",
+    "member": {
+      "add": "Yeni Üye Ekle",
+      "edit": "Üye Düzenle",
+      "deleteConfirmTitle": "{name} silinsin mi?",
+      "deleteConfirmMessage": "Bu işlem geri alınamaz. Üyeye ait tüm kayıtlar kaybolur.",
+      "deleteConfirmAction": "Evet, sil",
+      "deleted": "{name} silindi",
+      "activated": "✓ {name} aktif",
+      "deactivated": "⊘ {name} pasif",
+      "emailExists": "Bu e-posta zaten kayıtlı."
+    },
+    "application": {
+      "approveTitle": "Başvuruyu onayla: {name}",
+      "approveNote": "Yönetim Kurulu kararınızla ilgili not ekleyebilirsiniz (isteğe bağlı).",
+      "approved": "{name} onaylandı",
+      "rejectTitle": "Başvuruyu reddet: {name}",
+      "rejectNote": "Reddetme gerekçesi (denetim kaydına işlenecek)",
+      "rejected": "{name} reddedildi",
+      "pending": "⏳ Bekliyor",
+      "accepted": "✓ Kabul",
+      "denied": "✗ Red",
+      "empty": "Başvuru yok"
+    }
+  },
+  "pwa": {
+    "updateAvailable": "Yeni sürüm hazır.",
+    "updateNow": "Güncelle",
+    "installed": "Uygulama kuruldu",
+    "offline": "Çevrimdışısınız",
+    "online": "Yeniden çevrimiçi"
+  },
+  "notifications": {
+    "title": "Bildirimler",
+    "empty": "Henüz bildirim yok.",
+    "markAllRead": "Tümünü okundu işaretle",
+    "unreadCount": "{n} okunmamış",
+    "allRead": "Tümü okundu"
+  }
+}

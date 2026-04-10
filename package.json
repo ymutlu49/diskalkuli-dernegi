@@ -1,0 +1,29 @@
+{
+  "name": "diskalkuli-dernegi",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "Diskalkuli Derneği mobil-öncelikli PWA — Herkes Matematik Öğrenebilir.",
+  "author": "Prof. Dr. Yılmaz Mutlu",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "serve": "npx --yes http-server . -p 8080 -c-1",
+    "serve:python": "python -m http.server 8080",
+    "test": "node --test tests/*.test.js",
+    "test:watch": "node --test --watch tests/*.test.js",
+    "lint:sw": "node --check sw.js",
+    "validate:manifest": "node -e \"JSON.parse(require('fs').readFileSync('manifest.webmanifest','utf8'));console.log('manifest OK')\"",
+    "validate": "npm run lint:sw && npm run validate:manifest && npm test"
+  },
+  "keywords": [
+    "pwa",
+    "dyscalculia",
+    "education",
+    "turkish",
+    "offline-first",
+    "vanilla-js"
+  ]
+}

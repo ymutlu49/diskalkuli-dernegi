@@ -1,0 +1,60 @@
+# Netlify deploy configuration for the Diskalkuli Derneği PWA.
+#
+# Usage:
+#   1. In Netlify dashboard, connect the repo.
+#   2. Set "Base directory" to `app`.
+#   3. Deploy. Netlify reads this file for headers & SPA redirects.
+
+[build]
+  publish = "."
+
+# SPA fallback — any unknown path should serve index.html so the
+# client-side router can handle it.
+[[redirects]]
+  from = "/*"
+  to   = "/index.html"
+  status = 200
+
+# ─────────────────────────────────────────────────────────────────
+# Security headers applied to every route.
+#
+# Content-Security-Policy: 'unsafe-inline' for scripts is still
+# required because `index.html` contains inline onclick= handlers
+# that the compat shim hasn't migrated yet. Remove it as soon as
+# those are gone.
+# ─────────────────────────────────────────────────────────────────
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    X-Content-Type-Options    = "nosniff"
+    X-Frame-Options           = "DENY"
+    Referrer-Policy           = "strict-origin-when-cross-origin"
+    Permissions-Policy        = "camera=(), microphone=(), geolocation=(), payment=()"
+    Cross-Origin-Opener-Policy = "same-origin"
+    Content-Security-Policy   = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+
+# Don't cache the service worker — it must be revalidated on every
+# visit so new releases reach users quickly.
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+# Long-cache immutable fingerprinted assets. We don't fingerprint yet,
+# but this stanza is future-proof and harmless in the meantime.
+[[headers]]
+  for = "/icons/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# CSS and JS modules — short cache with revalidation.
+[[headers]]
+  for = "/styles/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"
+
+[[headers]]
+  for = "/src/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"

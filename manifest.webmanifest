@@ -1,0 +1,67 @@
+{
+  "id": "/diskalkuli-dernegi/",
+  "name": "Diskalkuli Derneği",
+  "short_name": "Diskalkuli",
+  "description": "Diskalkuli Derneği mobil uygulaması — Herkes Matematik Öğrenebilir.",
+  "lang": "tr",
+  "dir": "ltr",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "orientation": "portrait",
+  "background_color": "#FAFAF8",
+  "theme_color": "#1B5E20",
+  "categories": ["education", "health", "lifestyle"],
+  "icons": [
+    {
+      "src": "./icons/logo-small.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Haberler",
+      "short_name": "Haberler",
+      "description": "Son duyuru ve haberler",
+      "url": "./index.html#haberler",
+      "icons": [{ "src": "./icons/logo-small.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Eğitim",
+      "short_name": "Eğitim",
+      "description": "Kurslar ve eğitim içerikleri",
+      "url": "./index.html#egitim",
+      "icons": [{ "src": "./icons/logo-small.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Farkındalık",
+      "short_name": "Farkındalık",
+      "description": "Diskalkuli nedir? Sıkça sorulan sorular",
+      "url": "./index.html#farkindalik",
+      "icons": [{ "src": "./icons/logo-small.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Üye Ol",
+      "short_name": "Üye Ol",
+      "description": "Üyelik başvuru formu",
+      "url": "./index.html#uye-basvuru",
+      "icons": [{ "src": "./icons/logo-small.png", "sizes": "192x192" }]
+    }
+  ],
+  "prefer_related_applications": false
+}
